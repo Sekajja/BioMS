@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:security="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Layout/Layout">
+      
+    <head>
+        <title>Bio-Data</title>
+        <link rel="stylesheet" th:href="@{/css/fonts/fonts.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/jquery-ui.css}" type="text/css"/>
+	    <link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+	    <link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap-theme.min.css}" type="text/css" />
+	    <link rel="stylesheet" th:href="@{/css/font-awesome-4.5.0/css/font-awesome.min.css}" type="text/css" />
+	    <link rel="stylesheet" th:href="@{/css/welcome.css}" type="text/css"/>
+	    <style type="text/css">
+	    	.ui-widget{
+	    		font-family:'Raleway',sans-serif;
+	    	}
+	    	.eventmarker{
+	    		background-image: url('/Aventor/images/Marker.png');	    		
+	    		background-repeat: no-repeat;
+	    	}
+	    </style>
+    </head>    
+    
+    <body style="background-color:#fcfcfc; font-family:'Raleway',sans-serif;">
+   
+     <div layout:fragment="page-heading">
+		<span style="font-size:220%; margin-left:5px;">Bio-Data/New Entry</span>
+    </div> 
+    
+   	 <div layout:fragment="page-heading-buttons" align="right">
+    	<div style="float:right;" data-toggle="modal" data-target="#inventory-modal">
+	   		<a href="#" class="btn btn-info btn-sm" id="saveEntry"><i class="fa fa-th" style="margin-right: 5px;"></i>Add Entry</a>	
+	   	</div>    	                       	
+    </div> 
+
+    
+    <div layout:fragment="page-content-area">
+    
+    <form th:action="@{/inventory/item/new}" action="#" th:object="${item}" method="post" id="itemForm">
+    
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2">					
+					<div style="border-top: 2px #AAFFDD solid;  background-color:#fff; width:150px; height: 150px;">
+						  <img src="/Aventor/images/pic02.jpg" th:src="@{/images/pic02.jpg}" alt="..." width="150px" height="120px"/>
+					      <div style="margin-top:5px;">					        
+					        <p><a href="#" class="btn btn-info btn-sm" style="width:100%;" role="button">Upload Photo</a></p>
+					      </div>
+					</div>  	
+				</div>
+				
+				<div class="col-lg-3">	
+					
+							    	          
+			            <div class="input-group" style="margin:5px;width:80%;">
+						  <span class="input-group-addon" id="itemname-addon"><i class="fa fa-user fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="First Name" name="firstname" aria-describedby="itemname-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+						</div>
+						<div class="input-group" style="margin:5px;width:80%;">
+						  <span class="input-group-addon" id="itemname-addon"><i class="fa fa-user fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Last Name" name="lastname" aria-describedby="itemname-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+						</div>
+						<div class="input-group" style="margin:5px;width:80%;">
+						  <span class="input-group-addon" id="itemname-addon"><i class="fa fa-user fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" placeholder="Other Names (optional)" name="othernames" aria-describedby="itemname-addon"/>
+						</div>
+						
+						<div class="input-group" style="margin:5px;width:80%;">
+						  <textarea class="form-control input-sm" cols="20" rows="2" name="brief" placeholder="Write a brief on this person (optional)"></textarea>
+						</div>
+						
+								
+						            	
+				</div>
+				
+				<div class="col-lg-3">
+				
+					<div class="input-group" style="margin:5px; width:80%;">
+		    	    	<span class="input-group-addon" id="gender-addon"><i class="fa fa-user fa-fw"></i></span>
+		    	    	<span class="input-group-addon" style="width: 0%;">
+			    	    	<label class="radio-inline" style="margin-right: 10%;">
+							  <input type="radio" checked="checked" name="gender" id="inlineRadio1" value="Male"/> Male
+							</label>
+							<label class="radio-inline" style="margin-right: 25%;">
+							  <input type="radio" id="inlineRadio2" name="gender" value="Female"/> Female
+							</label>
+						</span>
+					</div>
+					
+					<div class="input-group" style="margin:5px;width:80%;">
+						  <span class="input-group-addon" id="itemnation-addon"><i class="fa fa-user fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Nationality"  name="nationality" aria-describedby="itemnation-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+					
+					<div class="input-group" style="margin:5px;width:80%;">
+						  <span class="input-group-addon" id="itemreligion-addon"><i class="fa fa-user fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Religion" name="religion" aria-describedby="itemreligion-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+					
+					<div class="input-group" style="margin:5px;width:80%;">
+						  <span class="input-group-addon" id="itemnation-addon"><i class="fa fa-user fa-fw"></i></span>
+						  <select class="form-control input-sm" name="maritalstatus" aria-describedby="itemnation-addon">
+						  	<option th:value="Single">Single</option>
+						  	<option th:value="Married">Married</option>
+						  	<option th:value="Divorced">Divorced</option>
+						  </select>
+						  
+					</div>
+					
+					<div class="input-group" style="margin:5px;width:80%;">
+						  <span class="input-group-addon" id="itemnation-addon"><i class="fa fa-user fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Occupation" name="occupation" aria-describedby="itemnation-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+						
+					
+				</div>
+				
+				<div class="col-lg-3">
+					<div class="input-group" style="margin:5px;width:80%;">
+						  <span class="input-group-addon" id="itembirthday-addon"><i class="fa fa-user fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" id="dob" type="text" placeholder="Date of Birth (DD/MM/YYYY)" name="birthday" aria-describedby="itembirthday-addon" />
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+  			  			  <span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+					<div class="input-group" style="margin:5px;width:80%;">
+					  <span class="input-group-addon" id="itemnextofkin-addon"><i class="fa fa-user fa-fw"></i></span>
+					  <input class="form-control input-sm" type="text" placeholder="Next of Kin (optional)" name="nextofkin" aria-describedby="itemname-addon"/>
+					</div>
+					
+					<div class="input-group" style="margin:5px;width:80%;">
+					  <span class="input-group-addon" id="itemnextofkinrelation-addon"><i class="fa fa-user fa-fw"></i></span>
+					  <input class="form-control input-sm" type="text" placeholder="Next of Kin relation (optional)" name="nextofkinrelation" aria-describedby="itemname-addon"/>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div style="width:100%;border:1px #dddddd solid;margin-top:10px;"></div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+<!-- _________!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!______________ -->			
+			<div class="row" style="margin-top:30px;padding:0px;">
+				
+				
+				<div class="col-lg-3">				
+					
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">History/Experience</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;height:100%;">
+					  <div id="eventtable"></div>
+					    Enter significant Events that took place at some point in time. 
+					    <p style="margin-top: 5px;"><a href="#" data-toggle="modal" data-target="#eventsmodal">+ Add Event</a></p>
+					  </div>
+					</div>          	
+				</div>
+				
+				<div class="col-lg-5" align="left">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Address Information</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					  <div id="addresstable"></div>
+					    Provide an address for this entry. <a href="#" data-toggle="modal" data-target="#addressmodal">+ Add Address</a>
+					  </div>
+					</div>  
+					
+					 <div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Education Background</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					  <div id="institutiontable"></div>
+					    Provide learning Institutions for entry's academic achievements. <a href="#" data-toggle="modal" data-target="#institutionmodal">+ Add Institution</a>
+					  </div>
+					</div>
+					
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Skills</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					  <div id="skillstable"></div>
+					    Provide skills and abilities possessed by this entry. <a href="#" data-toggle="modal" data-target="#skillsmodal">+ Add Skill</a>
+					  </div>
+					</div>   
+				</div>
+				 
+				<div class="col-lg-4">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Contact Information</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					    Provide Entry's contact information. <a href="#" data-toggle="modal" data-target="#contactmodal">+ Add Contact</a>
+					    <div style="width:100%; border: 1px #ccc solid;"></div>
+					    Provide Entry's next of kin contact information. <a href="#" data-toggle="modal" data-target="#kincontactmodal">+ Add Contact</a>
+					  </div>
+					</div> 
+					
+					
+					  
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Origin</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					    
+					  	<div class="row">
+						  	<div style="float: left;">
+						  		<div class="input-group" style="margin:5px;width:85%;">
+								  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+								  <input class="form-control input-sm notnull" type="text" placeholder="Home District" name="origindistrict" aria-describedby="itemorigin-addon"/>
+								  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+		  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+								</div>
+						  	</div>
+						  	<div style="float: left;">
+						  		<div class="input-group" style="margin:5px;width:85%;">
+								  <span class="input-group-addon" id="itemtribe-addon"><i class="fa fa-map fa-fw"></i></span>
+								  <input class="form-control input-sm notnull" type="text" placeholder="Tribe" name="tribe" aria-describedby="itemtribe-addon"/>
+								  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+		  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+								</div>
+						  	</div>
+					  	</div>
+					  	<div class="row">
+						  	<div style="float: left;">
+						  		<div class="input-group" style="margin:5px;width:85%;">
+								<span class="input-group-addon" id="itemhomelanguage-addon"><i class="fa fa-map fa-fw"></i></span>
+								<input class="form-control input-sm notnull" type="text" placeholder="Home language" name="homelanguage" aria-describedby="itemhomelanguage-addon"/>
+								<span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+	  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+							</div>
+						  	</div>
+						  	<div style="float: left;">
+						  		<div class="input-group" style="margin:5px;width:85%;">
+								  <span class="input-group-addon" id="itempreferredlanguage-addon"><i class="fa fa-map fa-fw"></i></span>
+								  <input class="form-control input-sm notnull" type="text" placeholder="Preferred language" name="preferredlanguage" aria-describedby="itempreferredlanguage-addon"/>
+								  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+		  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+								</div>
+						  	</div>
+					  	</div>
+					  	<p style="margin-top: 5px;">Entry may speak more languages. <a href="#" data-toggle="modal" data-target="#languagemodal">+ Add Language</a></p>
+					  </div>
+					</div>
+					  
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Other Information</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:80%;">
+					    There may be additional information about the entry this form is not able to capture.
+					    <p style="margin-top: 5px;"><a href="#" data-toggle="modal" data-target="#additionalmodal">+ Add More Information</a></p>
+					    
+					  </div>
+					</div>            	
+				</div>
+				
+			</div>
+			
+			
+			
+		</div>
+		
+		
+		
+		</form>
+	</div>
+	
+	<div layout:fragment="loader">
+		<!-- Loader -->
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="newitem-modal" style="height:150px;" id="newitem-modal">
+		  <div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+		    <div align="center">Loading</div>
+		    <div align="center"> <i class="fa fa-cog fa-spin fa-5x"></i></div>		     
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- MY MODELS -->
+		<div class="modal fade" id="eventsmodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">New Event</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+		      	<div class="input-group" style="margin:5px;width:80%;">
+					  <span class="input-group-addon" id="itemevent-addon"><i class="fa fa-history fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" id="eventsmodalevent" type="text" placeholder="Event" aria-describedby="itemevent-addon" />
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+				</div>
+		      
+		      	<div class="input-group" style="margin:5px;width:80%;">
+				  <textarea class="form-control input-sm" cols="20" rows="2" id="eventsmodaldescription" placeholder="Write a brief on this person (optional)"></textarea>
+				</div>
+		      
+		        <div class="input-group" style="margin:5px;width:80%;">
+					  <span class="input-group-addon" id="itemstartdate-addon"><i class="fa fa-history fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="date" id="eventsmodaldatestarted" placeholder="Date Started" aria-describedby="itemstartdate-addon" />
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+				</div>
+				
+				<div class="input-group" style="margin:5px;width:80%;">
+					  <span class="input-group-addon" id="itemenddate-addon"><i class="fa fa-history fa-fw"></i></span>
+					  <input class="form-control input-sm" type="date" id="eventsmodaldateended" placeholder="Date Ended" aria-describedby="itemenddate-addon" />
+					  
+				</div>
+				
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="eventsmodalbtn" class="btn btn-primary">Add Event</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    <div class="modal fade" id="eventsmodaledit" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Change Event</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+		      	<div class="input-group" style="margin:5px;width:80%;">
+					  <span class="input-group-addon" id="itemevent-addon"><i class="fa fa-history fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" id="eventsmodaleventedit" type="text" placeholder="Event" aria-describedby="itemevent-addon" />
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+				</div>
+		      
+		      	<div class="input-group" style="margin:5px;width:80%;">
+				  <textarea class="form-control input-sm" cols="20" rows="2" id="eventsmodaldescriptionedit" placeholder="Write a brief on this person (optional)"></textarea>
+				</div>
+		      
+		        <div class="input-group" style="margin:5px;width:80%;">
+					  <span class="input-group-addon" id="itemstartdate-addon"><i class="fa fa-history fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="date" id="eventsmodaldatestartededit" placeholder="Date Started" aria-describedby="itemstartdate-addon" />
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+				</div>
+				
+				<div class="input-group" style="margin:5px;width:80%;">
+					  <span class="input-group-addon" id="itemenddate-addon"><i class="fa fa-history fa-fw"></i></span>
+					  <input class="form-control input-sm" type="date" id="eventsmodaldateendededit" placeholder="Date Ended" aria-describedby="itemenddate-addon" />
+					  
+				</div>
+				
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="eventsmodaleditbtn" class="btn btn-primary">Save Changes</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    
+	    <div class="modal fade" id="addressmodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">New Address</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+		        <div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" id="addressmodalname" placeholder="Address Name" aria-describedby="itemorigin-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemtribe-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalpostaladdress" placeholder="Postal Address" aria-describedby="itemtribe-addon"/>
+						</div>
+				  	</div>
+				</div>
+				
+				<div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodaldistrict" placeholder="District" aria-describedby="itemorigin-addon"/>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemtribe-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalvillage" placeholder="Village/Town" aria-describedby="itemtribe-addon"/>
+						</div>
+				  	</div>
+				</div>
+				
+				<div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalcounty" placeholder="County" aria-describedby="itemorigin-addon"/>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemtribe-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalsubcounty" placeholder="Subcounty" name="subcounty" aria-describedby="itemtribe-addon"/>
+						</div>
+				  	</div>
+				</div>
+				
+				<div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalcountry" placeholder="Country" value="Uganda" aria-describedby="itemorigin-addon"/>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalparish" placeholder="Parish" name="parish" aria-describedby="itemorigin-addon"/>
+						</div>
+				  	</div>					  	
+				</div>
+				
+				<div class="input-group" style="margin:5px;width:85%;">
+				  <textarea class="form-control input-sm" cols="20" rows="2" id="addressmodaldescription" placeholder="Further description of address"></textarea>
+				</div>
+				
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="addressmodalbtn" class="btn btn-primary">Add Address</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    <div class="modal fade" id="addressmodaledit" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Change Address</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+		        <div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" id="addressmodalnameedit" placeholder="Address Name" aria-describedby="itemorigin-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemtribe-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalpostaladdressedit" placeholder="Postal Address" aria-describedby="itemtribe-addon"/>
+						</div>
+				  	</div>
+				</div>
+				
+				<div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodaldistrictedit" placeholder="District" aria-describedby="itemorigin-addon"/>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemtribe-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalvillageedit" placeholder="Village/Town" aria-describedby="itemtribe-addon"/>
+						</div>
+				  	</div>
+				</div>
+				
+				<div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalcountyedit" placeholder="County" aria-describedby="itemorigin-addon"/>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemtribe-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalsubcountyedit" placeholder="Subcounty" name="subcounty" aria-describedby="itemtribe-addon"/>
+						</div>
+				  	</div>
+				</div>
+				
+				<div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalcountryedit" placeholder="Country" value="Uganda" aria-describedby="itemorigin-addon"/>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+						  <input class="form-control input-sm" type="text" id="addressmodalparishedit" placeholder="Parish" name="parish" aria-describedby="itemorigin-addon"/>
+						</div>
+				  	</div>					  	
+				</div>
+				
+				<div class="input-group" style="margin:5px;width:85%;">
+				  <textarea class="form-control input-sm" cols="20" rows="2" id="addressmodaldescriptionedit" placeholder="Further description of address"></textarea>
+				</div>
+				
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="addressmodalbtnedit" class="btn btn-primary">Save Changes</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    
+	    <div class="modal fade" id="institutionmodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">New Institution</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="input-group" style="margin:5px;width:95%;">
+						  <span class="input-group-addon" id="iteminstitute-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Institute Name" id="institutionmodalname" aria-describedby="iteminstitute-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+	 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+					<div class="input-group" style="margin:5px;width:95%;">
+						  <span class="input-group-addon" id="iteminstituteloc-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Institute Location" id="institutionmodallocation"  aria-describedby="iteminstituteloc-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+	 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+					
+					<div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:95%;">
+						  <span class="input-group-addon" id="itemaward-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Award" id="institutionmodalaward" aria-describedby="itemaward-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="iteminstutionyear-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Year" id="institutionmodalyear" aria-describedby="iteminstutionyear-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+						</div>
+				  	</div>
+				</div>
+					
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="institutionmodalbtn" class="btn btn-primary">Add Institution</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    <div class="modal fade" id="institutionmodaledit" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Change Institution</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="input-group" style="margin:5px;width:95%;">
+						  <span class="input-group-addon" id="iteminstitute-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Institute Name" id="institutionmodalnameedit" aria-describedby="iteminstitute-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+	 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+					<div class="input-group" style="margin:5px;width:95%;">
+						  <span class="input-group-addon" id="iteminstituteloc-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Institute Location" id="institutionmodallocationedit"  aria-describedby="iteminstituteloc-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+	 			  		  <span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+					
+					<div class="row">
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:95%;">
+						  <span class="input-group-addon" id="itemaward-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Award" id="institutionmodalawardedit" aria-describedby="itemaward-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+						</div>
+				  	</div>
+				  	<div class="col-lg-6">
+				  		<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="iteminstutionyear-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Year" id="institutionmodalyearedit" aria-describedby="iteminstutionyear-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+ 			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+						</div>
+				  	</div>
+				</div>
+					
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="institutionmodaleditbtn" class="btn btn-primary">Save Changes</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    
+	    <div class="modal fade" id="skillsmodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">New Skill</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+		      	<div class="input-group" style="margin:5px;width:85%;">
+				  <span class="input-group-addon" id="itemskill-addon"><i class="fa fa-futbol-o fa-fw"></i></span>
+				  <input class="form-control input-sm notnull" type="text" placeholder="Skill" id="skillsmodalname" aria-describedby="itemskill-addon"/>
+				  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+		  		  <span id="inputError2Status" class="sr-only">(error)</span>
+				</div>
+		        <div class="input-group" style="margin:5px;width:85%;">
+				  <textarea class="form-control input-sm" cols="20" rows="2" id="skillsmodaldescription" placeholder="Further description of this skill"></textarea>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="skillsmodalbtn" class="btn btn-primary">Add Skill</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    <div class="modal fade" id="skillsmodaledit" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Change Skill</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+		      	<div class="input-group" style="margin:5px;width:85%;">
+				  <span class="input-group-addon" id="itemskill-addon"><i class="fa fa-futbol-o fa-fw"></i></span>
+				  <input class="form-control input-sm notnull" type="text" placeholder="Skill" id="skillmodalnameedit" aria-describedby="itemskill-addon"/>
+				  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+		  		  <span id="inputError2Status" class="sr-only">(error)</span>
+				</div>
+		        <div class="input-group" style="margin:5px;width:85%;">
+				  <textarea class="form-control input-sm" cols="20" rows="2" id="skillmodaldescriptionedit" placeholder="Further description of this skill"></textarea>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="skillmodaleditbtn" class="btn btn-primary">Save Changes</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    
+	    <div class="modal fade" id="contactmodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">New Contact</h4>
+		      </div>
+		      <div class="modal-body">
+		        	
+		        	<div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemcontactfor-addon"><i class="fa fa-home fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="text" placeholder="Location or device e.g mobile, office, fax, email etc." aria-describedby="itemcontactfor-addon"/>
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+			  	
+			  		<div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemcontact-addon"><i class="fa fa-phone fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="text" placeholder="Contact" aria-describedby="itemcontact-addon"/>
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Add Contact</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    <div class="modal fade" id="kincontactmodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">New Contact</h4>
+		      </div>
+		      <div class="modal-body">
+		        	
+		        	<div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemcontactfor-addon"><i class="fa fa-home fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="text" placeholder="Location or device e.g mobile, office, fax, email etc." aria-describedby="itemcontactfor-addon"/>
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+			  	
+			  		<div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemcontact-addon"><i class="fa fa-phone fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="text" placeholder="Contact" aria-describedby="itemcontact-addon"/>
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Add Contact</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    <div class="modal fade" id="languagemodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">New Language</h4>
+		      </div>
+		      <div class="modal-body">
+		        <div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemlanguage-addon"><i class="fa fa-feed fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="text" placeholder="Language" aria-describedby="language-addon"/>
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+			  	
+			  		<div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemproficiency-addon"><i class="fa fa-feed fa-fw"></i></span>
+					  <select class="form-control input-sm" aria-describedby="itemproficiency-addon">
+						  	<option th:value="verygood">Very Good</option>
+						  	<option th:value="good" selected="selected">Good</option>
+						  	<option th:value="fair">Fair</option>
+						  </select>
+					</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Add Language</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	   <div class="modal fade" id="additionalmodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Additional information</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+		      	<div class="input-group" style="margin:5px;width:85%;">
+				  <span class="input-group-addon" id="itemextra-addon"><i class="fa fa-info fa-fw"></i></span>
+				  <input class="form-control input-sm notnull" type="text" placeholder="Title" aria-describedby="itemextra-addon"/>
+				  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+		  		  <span id="inputError2Status" class="sr-only">(error)</span>
+				</div>
+		        <div class="input-group" style="margin:5px;width:85%;">
+				  <textarea class="form-control input-sm" cols="20" rows="2" placeholder="Provide further Information"></textarea>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Add Information</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+    
+    
+    </div>
+    <script th:src="@{/js/jquery-1.11.2.min.js}" type="text/javascript"></script>  
+    <script th:src="@{/js/jquery-ui.js}" type="text/javascript"></script> 
+	<script th:src="@{/js/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+    
+    <div layout:fragment="script">
+	    <script type="text/javascript" th:inline="javascript">
+	    //<![CDATA[
+	  
+	    
+	    $('#saveEntry').click(function (e) {
+	    	e.preventDefault();
+	    	$( "#itemForm" ).submit();
+    	});
+	    
+		$(".notnull").change(function(e){
+    		
+    		if($(this).val() === ""){
+    			$(this).closest("div").prop("class","input-group has-error has-feedback");
+    			$(this).next("span").prop("class","fa fa-spinner fa-fw fa-spin form-control-feedback");
+    		}else{
+    			$(this).closest("div").prop("class","input-group has-success has-feedback");
+    			$(this).next("span").prop("class","fa fa-check fa-fw form-control-feedback");
+    		}
+    	
+    	});
+		
+		$( "#dob" ).datepicker({
+			//inline: true
+			changeMonth: true,
+		    changeYear: true,
+		    dateFormat: "dd/mm/yy",
+		    defaultDate: "1/1/1990"
+		});
+		
+		
+/*######EVENT MODAL################################################################*/
+		//$('#eventsmodal').on('shown.bs.modal', function () {});
+		$('#eventsmodalbtn').click(function (e) {
+			var event = $('#eventsmodalevent').val();
+			var eventdescription = $('#eventsmodaldescription').val();
+			var eventstart = $('#eventsmodaldatestarted').val();
+			var eventend = $('#eventsmodaldateended').val();
+			var eventtable = $('#eventtable')
+			var quote = "\"";
+			
+			var eventtablelastrow = $('#eventtable table tr:last');
+			
+			
+			if(eventtable.html() === ""){
+				
+				
+				var today = new Date();
+				var mmindex = today.getMonth();
+				var mm = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+				var yy = today.getFullYear(); 
+				
+				eventtable.html('<table class="table">'
+						+'<tr>'
+						+'<td width="45%" align="right" height="60px" valign="middle" style="padding-top: 20px;">'						
+						+mm[mmindex]+", "+yy						
+						+'</td>'
+						+'<td class="eventmarker"></td>'
+						+'<td width="45%"></td>'
+						+'</tr>'
+						+'</table>');
+				
+				$('#eventtable table tbody tr:last').after('<tr><td width="45%" align="right" height="60px" valign="middle">'
+															+'<div>	<div style="float:left; width:10%;" >'
+															+'<span><a style="cursor:pointer" class="eventremove" title="Remove"><i class="fa fa-close fa-fw"></i></a></span>'
+															+'</div><div style="float:left; width:90%;padding-top:12px;">'
+															+eventstart
+															+'</div></div>'
+															+'<input type="hidden" class="showeventname" value="'+event+'"/>'
+															+'<input type="hidden" class="showeventdesc" value="'+eventdescription+'"/>'
+															+'<input type="hidden" class="showeventstart" value="'+eventstart+'"/>'
+															+'<input type="hidden" class="showeventend" value="'+eventend+'"/>'
+															+'</td><td class="eventmarker"></td><td width="45%"><a class="showevent" style="cursor:pointer">'+event+'</a></td></tr>');
+					$('#eventsmodal').modal("hide");
+					
+
+					$('.showevent').click(function (e) {
+						$('#eventsmodaledit').modal("show");
+						
+						var row = $(this).closest('tr');
+						$('#eventsmodaleventedit').val(row.find(".showeventname").val());
+						$('#eventsmodaldescriptionedit').val(row.find(".showeventdesc").val());
+						$('#eventsmodaldatestartededit').val(row.find(".showeventstart").val());
+						$('#eventsmodaldateendededit').val(row.find(".showeventend").val());
+						
+						
+						$('#eventsmodaleditbtn').click(function (e) {
+							row.find(".showeventname").val($('#eventsmodaleventedit').val());
+							row.find(".showeventdesc").val($('#eventsmodaldescriptionedit').val());
+							row.find(".showeventstart").val($('#eventsmodaldatestartededit').val());
+							row.find(".showeventend").val($('#eventsmodaldateendededit').val());
+							$('#eventsmodaledit').modal("hide");
+						});
+						
+					});
+				
+			}else{
+				
+				$('#eventtable table tbody tr:last').after('<tr><td width="45%" align="right" height="60px" valign="middle">'
+						+'<div>	<div style="float:left; width:10%;" >'
+						+ '<span><a style="cursor:pointer" class="eventremove"><i class="fa fa-close fa-fw"></i></a></span>'
+						+'</div><div style="float:left; width:90%;padding-top:12px;">'
+						+eventstart
+						+'</div></div>'
+						+'<input type="hidden" class="showeventname" value="'+event+'"/>'
+						+'<input type="hidden" class="showeventdesc" value="'+eventdescription+'"/>'
+						+'<input type="hidden" class="showeventstart" value="'+eventstart+'"/>'
+						+'<input type="hidden" class="showeventend" value="'+eventend+'"/>'
+						+'</td><td class="eventmarker"></td><td width="45%"><a class="showevent" style="cursor:pointer">'+event+'</a></td></tr>');
+				$('#eventsmodal').modal("hide");
+				
+				
+				$('.showevent').click(function (e) {
+					$('#eventsmodaledit').modal("show");
+					
+					var row = $(this).closest('tr');
+					$('#eventsmodaleventedit').val(row.find(".showeventname").val());
+					$('#eventsmodaldescriptionedit').val(row.find(".showeventdesc").val());
+					$('#eventsmodaldatestartededit').val(row.find(".showeventstart").val());
+					$('#eventsmodaldateendededit').val(row.find(".showeventend").val());
+					
+					
+					$('#eventsmodaleditbtn').click(function (e) {
+						row.find(".showeventname").val($('#eventsmodaleventedit').val());
+						row.find(".showeventdesc").val($('#eventsmodaldescriptionedit').val());
+						row.find(".showeventstart").val($('#eventsmodaldatestartededit').val());
+						row.find(".showeventend").val($('#eventsmodaldateendededit').val());
+						$('#eventsmodaledit').modal("hide");
+					});
+					
+				});
+				
+				
+				
+				
+				
+			}
+			
+			$('.eventremove').click(function (e) {
+				$(this).closest('tr').fadeOut(400,"swing",function(e){});				
+			});
+			
+			
+		});
+		
+		
+		
+/*######################################################################*/	  
+
+
+
+
+
+
+
+/*######ADDRESS MODAL################################################################*/
+
+ //$('#addressmodal').on('shown.bs.modal', function () {});
+	var addressCounter = 0;
+ 
+ 
+ $('#addressmodalbtn').click(function (e) {
+	    addressCounter += 1;
+	 	var name = $('#addressmodalname').val();
+		var postaladdress = $('#addressmodalpostaladdress').val();
+		var district = $('#addressmodaldistrict').val();
+		var village = $('#addressmodalvillage').val();
+		var county = $('#addressmodalcounty').val();
+		var subcounty = $('#addressmodalsubcounty').val();
+		var country = $('#addressmodalcountry').val();
+		var parish = $('#addressmodalparish').val();
+		var description = $('#addressmodaldescription').val();
+		var addresstable = $('#addresstable');
+		
+		
+		
+		if(addresstable.html() === ""){
+			
+			var addressString = "";
+			if(name !== ""){
+				addressString += '<p><a class="showaddress" style="cursor:pointer;">'+name+'</a>,</p>';
+			}
+			if(village !== ""){
+				addressString += '<p>'+village+',</p>';
+			}
+			if(postaladdress !== ""){
+				addressString += '<p>'+postaladdress+',</p>';
+			}
+			if(district !== "" && country !== ""){
+				addressString += '<p>'+district+', '+country+'.</p>';
+			}else{
+				
+				if(district !== ""){
+					addressString += '<p>'+district+',</p>';
+				}
+				if(country !== ""){
+					addressString += '<p>'+country+'.</p>';
+				}
+			}
+			
+			addresstable.html('<div class="row">'
+				  	+'<div class="col-lg-6 address">'
+				  	+'<div>'
+					+ '<span><a style="cursor:pointer" class="addressremove"><i class="fa fa-close fa-fw"></i></a></span>'
+					+'</div>'
+					+'<table class="table">'
+					+'<tr>'					
+					+'<td>'					
+					+'<b>Address '+addressCounter+':</b>'					
+					+'</td>'
+					+'<td>'
+					+ addressString								
+					+'</td>'
+					+'</tr>'
+					+'</table>'
+					+'<input type="hidden" class="showaddressname" value="'+name+'"/>'
+					+'<input type="hidden" class="showaddressdesc" value="'+description+'"/>'
+					+'<input type="hidden" class="showaddresspostaladdress" value="'+postaladdress+'"/>'
+					+'<input type="hidden" class="showaddressdistrict" value="'+district+'"/>'
+					+'<input type="hidden" class="showaddressvillage" value="'+village+'"/>'
+					+'<input type="hidden" class="showaddresscounty" value="'+county+'"/>'
+					+'<input type="hidden" class="showaddresscountry" value="'+country+'"/>'
+					+'<input type="hidden" class="showaddresssubcounty" value="'+subcounty+'"/>'
+					+'<input type="hidden" class="showaddressparish" value="'+parish+'"/>'
+					+'</div></div>');
+			
+			
+			$('#addressmodal').modal("hide");
+			
+			$('.showaddress').click(function (e) {
+				$('#addressmodaledit').modal("show");
+				
+				var row = $(this).closest('#addresstable');
+				$('#addressmodalnameedit').val(row.find(".showaddressname").val());
+				$('#addressmodalpostaladdressedit').val(row.find(".showaddresspostaladdress").val());
+				$('#addressmodaldistrictedit').val(row.find(".showaddressdistrict").val());
+				$('#addressmodalvillageedit').val(row.find(".showaddressvillage").val());
+				$('#addressmodalcountyedit').val(row.find(".showaddresscounty").val());
+				$('#addressmodalsubcountyedit').val(row.find(".showaddresssubcounty").val());
+				$('#addressmodalcountryedit').val(row.find(".showaddresscountry").val());
+				$('#addressmodalparishedit').val(row.find(".showaddressparish").val());
+				$('#addressmodaldescriptionedit').val(row.find(".showaddressdesc").val());
+				
+				
+				$('#addressmodalbtnedit').click(function (e) {
+					row.find(".showaddressname").val($('#addressmodalnameedit').val());
+					row.find(".showaddresspostaladdress").val($('#addressmodalpostaladdressedit').val());
+					row.find(".showaddressdistrict").val($('#addressmodaldistrictedit').val());
+					row.find(".showaddressvillage").val($('#addressmodalvillageedit').val());
+					row.find(".showaddresscounty").val($('#addressmodalcountyedit').val());
+					row.find(".showaddresssubcounty").val($('#addressmodalsubcountyedit').val());
+					row.find(".showaddresscountry").val($('#addressmodalcountryedit').val());
+					row.find(".showaddressparish").val($('#addressmodalparishedit').val());
+					row.find(".showaddressdesc").val($('#addressmodaldescriptionedit').val());
+					$('#addressmodaledit').modal("hide");
+				});
+				
+			});
+			
+			
+			
+			
+			
+			
+			
+		}else{
+			
+			var addressString = "";
+			if(name !== ""){
+				addressString += '<p><a class="showaddress" style="cursor:pointer;">'+name+'</a>,</p>';
+			}
+			if(village !== ""){
+				addressString += '<p>'+village+',</p>';
+			}
+			if(postaladdress !== ""){
+				addressString += '<p>'+postaladdress+',</p>';
+			}
+			if(district !== "" && country !== ""){
+				addressString += '<p>'+district+', '+country+'.</p>';
+			}else{
+				
+				if(district !== ""){
+					addressString += '<p>'+district+',</p>';
+				}
+				if(country !== ""){
+					addressString += '<p>'+country+'.</p>';
+				}
+			}
+			
+			
+			$('#addresstable .address:last').after('<div class="col-lg-6 address">'
+					+'<div>'
+					+ '<span><a style="cursor:pointer" class="addressremove"><i class="fa fa-close fa-fw"></i></a></span>'
+					+'</div>'
+					+'<table class="table">'
+					+'<td>'
+					+'<b>Address '+addressCounter+':</b>'					
+					+'</td>'
+					+'<td>'
+					+ addressString						
+					+'</td>'
+					+'</tr></table>'
+					+'<input type="hidden" class="showaddressname" value="'+name+'"/>'
+					+'<input type="hidden" class="showaddressdesc" value="'+description+'"/>'
+					+'<input type="hidden" class="showaddresspostaladdress" value="'+postaladdress+'"/>'
+					+'<input type="hidden" class="showaddressdistrict" value="'+district+'"/>'
+					+'<input type="hidden" class="showaddressvillage" value="'+village+'"/>'
+					+'<input type="hidden" class="showaddresscounty" value="'+county+'"/>'
+					+'<input type="hidden" class="showaddresscountry" value="'+country+'"/>'
+					+'<input type="hidden" class="showaddresssubcounty" value="'+subcounty+'"/>'
+					+'<input type="hidden" class="showaddressparish" value="'+parish+'"/>'
+					+'</div>');
+			
+			$('#addressmodal').modal("hide");
+			
+			$('.showaddress').click(function (e) {
+				$('#addressmodaledit').modal("show");
+				
+				var row = $(this).closest('#addresstable');
+				$('#addressmodalnameedit').val(row.find(".showaddressname").val());
+				$('#addressmodalpostaladdressedit').val(row.find(".showaddresspostaladdress").val());
+				$('#addressmodaldistrictedit').val(row.find(".showaddressdistrict").val());
+				$('#addressmodalvillageedit').val(row.find(".showaddressvillage").val());
+				$('#addressmodalcountyedit').val(row.find(".showaddresscounty").val());
+				$('#addressmodalsubcountyedit').val(row.find(".showaddresssubcounty").val());
+				$('#addressmodalcountryedit').val(row.find(".showaddresscountry").val());
+				$('#addressmodalparishedit').val(row.find(".showaddressparish").val());
+				$('#addressmodaldescriptionedit').val(row.find(".showaddressdesc").val());
+				
+				
+				$('#eventsmodaleditbtn').click(function (e) {
+					row.find(".showeventname").val($('#eventsmodaleventedit').val());
+					row.find(".showeventdesc").val($('#eventsmodaldescriptionedit').val());
+					row.find(".showeventstart").val($('#eventsmodaldatestartededit').val());
+					row.find(".showeventend").val($('#eventsmodaldateendededit').val());
+					$('#eventsmodaledit').modal("hide");
+				});
+				
+			});
+		}
+		
+		$('.addressremove').click(function (e) {
+			$(this).closest('.address').fadeOut(400,"swing",function(e){});				
+		});
+		
+ });
+  
+
+/*######################################################################*/
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+/*######INSTITUTION MODAL################################################################*/
+		$('#institutionmodalbtn').click(function (e) {
+	    
+	 	var name = $('#institutionmodalname').val();
+		var location = $('#institutionmodallocation').val();
+		var award = $('#institutionmodalaward').val();
+		var year = $('#institutionmodalyear').val();
+		var institutiontable = $('#institutiontable');
+				
+		if(institutiontable.html() === ""){
+			institutiontable.html('<table class="table">'
+			+'<tr>'	
+			+'<th>Institution</th>'
+			+'<th>Award</th>'
+			+'<th>Year</th>'			
+			+'</tr>'
+			+'<tr>'	
+			+'<td><a class="showinstitution" style="cursor:pointer;">'+ name +'</a>'
+			+'<input type="hidden" class="showinstitutionname" value="'+name+'"/>'
+			+'<input type="hidden" class="showinstitutionlocation" value="'+location+'"/>'
+			+'<input type="hidden" class="showinstitutionaward" value="'+award+'"/>'
+			+'<input type="hidden" class="showinstitutionyear" value="'+year+'"/>'			
+			+'</td>'
+			+'<td class="showaward">'+ award +'</td>'
+			+'<td class="showyear">'+ year +'</td>'	
+			+'<td class="removeinstitution">'
+			+ '<span><a style="cursor:pointer" class="addressremove"><i class="fa fa-close fa-fw"></i></a></span>'
+			+'</td>'	
+			+'</tr>'
+			+'</table>'
+			);
+			
+			$('#institutionmodal').modal("hide");	
+			
+			$('.showinstitution').click(function (e) {
+				$('#institutionmodaledit').modal("show");
+				
+				var row = $(this).closest('tr');
+				$('#institutionmodalnameedit').val(row.find(".showinstitutionname").val());
+				$('#institutionmodallocationedit').val(row.find(".showinstitutionlocation").val());
+				$('#institutionmodalawardedit').val(row.find(".showinstitutionaward").val());
+				$('#institutionmodalyearedit').val(row.find(".showinstitutionyear").val());
+				
+				$('#institutionmodaleditbtn').click(function (e) {
+					row.find(".showinstitutionname").val($('#institutionmodalnameedit').val());
+					row.find(".showinstitution").html($('#institutionmodalnameedit').val());
+					row.find(".showinstitutionlocation").val($('#institutionmodallocationedit').val());
+					row.find(".showinstitutionaward").val($('#institutionmodalawardedit').val());
+					row.find(".showaward").html($('#institutionmodalawardedit').val());
+					row.find(".showinstitutionyear").val($('#institutionmodalyearedit').val());
+					row.find(".showyear").html($('#institutionmodalyearedit').val());										
+				$('#institutionmodaledit').modal("hide");
+				
+				});
+				
+			});
+		
+		}else{
+			
+			
+			institutiontable.find('table tr:last').after('<tr>'	
+					+'<td><a class="showinstitution" style="cursor:pointer;">'+ name +'</a>'
+					+'<input type="hidden" class="showinstitutionname" value="'+name+'"/>'
+					+'<input type="hidden" class="showinstitutionlocation" value="'+location+'"/>'
+					+'<input type="hidden" class="showinstitutionaward" value="'+award+'"/>'
+					+'<input type="hidden" class="showinstitutionyear" value="'+year+'"/>'			
+					+'</td>'
+					+'<td class="showaward">'+ award +'</td>'
+					+'<td class="showyear">'+ year +'</td>'		
+					+'<td class="removeinstitution">'
+					+ '<span><a style="cursor:pointer" class="addressremove"><i class="fa fa-close fa-fw"></i></a></span>'
+					+'</td>'
+					+'</tr>'					
+					);
+					
+					$('#institutionmodal').modal("hide");	
+					
+					$('.showinstitution').click(function (e) {
+						$('#institutionmodaledit').modal("show");
+						
+						var row = $(this).closest('tr');
+						$('#institutionmodalnameedit').val(row.find(".showinstitutionname").val());
+						$('#institutionmodallocationedit').val(row.find(".showinstitutionlocation").val());
+						$('#institutionmodalawardedit').val(row.find(".showinstitutionaward").val());
+						$('#institutionmodalyearedit').val(row.find(".showinstitutionyear").val());
+						
+						$('#institutionmodaleditbtn').click(function (e) {
+							row.find(".showinstitutionname").val($('#institutionmodalnameedit').val());
+							row.find(".showinstitution").html($('#institutionmodalnameedit').val());
+							row.find(".showinstitutionlocation").val($('#institutionmodallocationedit').val());
+							row.find(".showinstitutionaward").val($('#institutionmodalawardedit').val());
+							row.find(".showaward").html($('#institutionmodalawardedit').val());
+							row.find(".showinstitutionyear").val($('#institutionmodalyearedit').val());
+							row.find(".showyear").html($('#institutionmodalyearedit').val());										
+						$('#institutionmodaledit').modal("hide");
+						
+						});
+						
+					});
+		}
+		
+				$('.removeinstitution').click(function (e) {
+					$(this).closest('tr').fadeOut(400,"swing",function(e){});				
+				});
+		
+		
+		});
+		
+/*######################################################################*/
+
+
+
+
+/*######SKILLZ MODAL################################################################*/
+
+$('#skillsmodalbtn').click(function (e) {
+	    
+	 	var name = $('#skillsmodalname').val();
+		var description = $('#skillsmodaldescription').val();
+		var skillstable = $('#skillstable');
+				
+		if(skillstable.html() === ""){
+			var skillString = "";
+			if(description != ""){
+				skillString = '<div class="skill">'
+					+'<div>'
+					+ '<span><a style="cursor:pointer" class="skillremove"><i class="fa fa-close fa-fw"></i></a></span>'
+					+'</div>'
+					+'<table class="table">'
+					+'<tr>'
+					+'<td>Skill:</td>'
+					+'<td class="skillname">'
+					+'<a style="cursor:pointer">'
+					+ name
+					+'</a>'
+					+'</td>'
+					+'</tr>'
+					+'<tr>'
+					+'<td>Details:</td>'
+					+'<td class="skilldesc">'
+					+ description
+					+'</td>'
+					+'</tr>'
+					+'</table>'
+					+'</div>';
+			}else{
+				
+				skillString = '<div class="skill">'
+					+'<div>'
+					+ '<span><a style="cursor:pointer" class="skillremove"><i class="fa fa-close fa-fw"></i></a></span>'
+					+'</div>'
+					+'<table class="table">'
+					+'<tr>'
+					+'<td>Skill:</td>'
+					+'<td class="skillname">'
+					+'<a class="showskill" style="cursor:pointer">'
+					+ name
+					+'</a>'
+					+'</td>'
+					+'</tr>'
+					+'<tr>'
+					+'<td>Details:</td>'
+					+'<td class="skilldesc">'
+					+ description
+					+'</td>'
+					+'</tr>'
+					+'</table>'
+					+'</div>';
+				
+			}
+			
+			
+			
+			
+			skillstable.html(skillString);
+			
+			$('#skillsmodal').modal("hide");
+			
+			$('.showskill').click(function (e) {
+				$('#skillsmodaledit').modal("show");
+				
+				var row = $(this).closest('table');
+				$('#skillmodalnameedit').val(row.find(".skillname").html());
+				$('#skillmodaldescriptionedit').val(row.find(".skilldesc").html());
+				
+				$('#skillmodaleditbtn').click(function (e) {
+					row.find(".skillname").val($('#skillmodalnameedit').val());
+					row.find(".skilldesc").html($('#skillmodaldescriptionedit').val());
+					$('#skillsmodaledit').modal("hide");
+				});
+				
+				
+			});
+			
+		}else{
+			
+		}
+		
+		
+});
+
+/*######################################################################*/
+		
+		//]]>
+	    </script>
+	  </div>
+    
+    
+    
+	
+    </body>
+</html>
