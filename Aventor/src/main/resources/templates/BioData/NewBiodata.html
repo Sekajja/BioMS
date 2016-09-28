@@ -224,8 +224,10 @@
 					    <h3 class="panel-title">Contact Information</h3>
 					  </div>
 					  <div class="panel-body" style="font-size:85%;">
+					  	<div id="contacttable"></div>
 					    Provide Entry's contact information. <a href="#" data-toggle="modal" data-target="#contactmodal">+ Add Contact</a>
 					    <div style="width:100%; border: 1px #ccc solid;"></div>
+					    <div id="kincontacttable"></div>
 					    Provide Entry's next of kin contact information. <a href="#" data-toggle="modal" data-target="#kincontactmodal">+ Add Contact</a>
 					  </div>
 					</div> 
@@ -274,6 +276,7 @@
 								</div>
 						  	</div>
 					  	</div>
+					  	<div id="origintable" style="margin-top:10px;"></div>
 					  	<p style="margin-top: 5px;">Entry may speak more languages. <a href="#" data-toggle="modal" data-target="#languagemodal">+ Add Language</a></p>
 					  </div>
 					</div>
@@ -283,6 +286,7 @@
 					    <h3 class="panel-title">Other Information</h3>
 					  </div>
 					  <div class="panel-body" style="font-size:80%;">
+					  <div id="additionaltable"></div>
 					    There may be additional information about the entry this form is not able to capture.
 					    <p style="margin-top: 5px;"><a href="#" data-toggle="modal" data-target="#additionalmodal">+ Add More Information</a></p>
 					    
@@ -746,25 +750,56 @@
 		        	
 		        	<div class="input-group" style="margin:5px;width:85%;">
 					  <span class="input-group-addon" id="itemcontactfor-addon"><i class="fa fa-home fa-fw"></i></span>
-					  <input class="form-control input-sm notnull" type="text" placeholder="Location or device e.g mobile, office, fax, email etc." aria-describedby="itemcontactfor-addon"/>
+					  <input class="form-control input-sm notnull" type="text" id="contactmodaldevice" placeholder="Location or device e.g mobile, office, fax, email etc." aria-describedby="itemcontactfor-addon"/>
 					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
 			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
 					</div>
 			  	
 			  		<div class="input-group" style="margin:5px;width:85%;">
 					  <span class="input-group-addon" id="itemcontact-addon"><i class="fa fa-phone fa-fw"></i></span>
-					  <input class="form-control input-sm notnull" type="text" placeholder="Contact" aria-describedby="itemcontact-addon"/>
+					  <input class="form-control input-sm notnull" type="text" id="contactmodalcontact" placeholder="Contact" aria-describedby="itemcontact-addon"/>
 					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
 			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
 					</div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Add Contact</button>
+		        <button type="button" class="btn btn-primary" id="contactmodalbtn">Add Contact</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
+	     <div class="modal fade" id="contactmodaledit" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Change Contact</h4>
+		      </div>
+		      <div class="modal-body">
+		        	
+		        	<div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemcontactfor-addon"><i class="fa fa-home fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" id="contactmodaldeviceedit" type="text" placeholder="Location or device e.g mobile, office, fax, email etc." aria-describedby="itemcontactfor-addon"/>
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+			  	
+			  		<div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemcontact-addon"><i class="fa fa-phone fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="text" id="contactmodalcontactedit" placeholder="Contact" aria-describedby="itemcontact-addon"/>
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="contactmodaleditbtn">Save Changes</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    
 	    <div class="modal fade" id="kincontactmodal" style="margin-top: 50px;">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
@@ -776,25 +811,56 @@
 		        	
 		        	<div class="input-group" style="margin:5px;width:85%;">
 					  <span class="input-group-addon" id="itemcontactfor-addon"><i class="fa fa-home fa-fw"></i></span>
-					  <input class="form-control input-sm notnull" type="text" placeholder="Location or device e.g mobile, office, fax, email etc." aria-describedby="itemcontactfor-addon"/>
+					  <input class="form-control input-sm notnull" type="text" id="kincontactmodaldevice" placeholder="Location or device e.g mobile, office, fax, email etc." aria-describedby="itemcontactfor-addon"/>
 					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
 			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
 					</div>
 			  	
 			  		<div class="input-group" style="margin:5px;width:85%;">
 					  <span class="input-group-addon" id="itemcontact-addon"><i class="fa fa-phone fa-fw"></i></span>
-					  <input class="form-control input-sm notnull" type="text" placeholder="Contact" aria-describedby="itemcontact-addon"/>
+					  <input class="form-control input-sm notnull" type="text" id="kincontactmodalcontact" placeholder="Contact" aria-describedby="itemcontact-addon"/>
 					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
 			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
 					</div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Add Contact</button>
+		        <button type="button" id="kincontactmodalbtn" class="btn btn-primary">Add Contact</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
+	    <div class="modal fade" id="kincontactmodaledit" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Change Contact</h4>
+		      </div>
+		      <div class="modal-body">
+		        	
+		        	<div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemcontactfor-addon"><i class="fa fa-home fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="text" id="kincontactmodaldeviceedit" placeholder="Location or device e.g mobile, office, fax, email etc." aria-describedby="itemcontactfor-addon"/>
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+			  	
+			  		<div class="input-group" style="margin:5px;width:85%;">
+					  <span class="input-group-addon" id="itemcontact-addon"><i class="fa fa-phone fa-fw"></i></span>
+					  <input class="form-control input-sm notnull" type="text" id="kincontactmodalcontactedit" placeholder="Contact" aria-describedby="itemcontact-addon"/>
+					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+					</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="kincontactmodaleditbtn" class="btn btn-primary">Save Changes</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	    
 	    <div class="modal fade" id="languagemodal" style="margin-top: 50px;">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
@@ -805,28 +871,61 @@
 		      <div class="modal-body">
 		        <div class="input-group" style="margin:5px;width:85%;">
 					  <span class="input-group-addon" id="itemlanguage-addon"><i class="fa fa-feed fa-fw"></i></span>
-					  <input class="form-control input-sm notnull" type="text" placeholder="Language" aria-describedby="language-addon"/>
+					  <input class="form-control input-sm notnull" type="text" id="languagemodallanguage" placeholder="Language" aria-describedby="language-addon"/>
 					  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
 			  		  		<span id="inputError2Status" class="sr-only">(error)</span>
 					</div>
 			  	
 			  		<div class="input-group" style="margin:5px;width:85%;">
 					  <span class="input-group-addon" id="itemproficiency-addon"><i class="fa fa-feed fa-fw"></i></span>
-					  <select class="form-control input-sm" aria-describedby="itemproficiency-addon">
-						  	<option th:value="verygood">Very Good</option>
-						  	<option th:value="good" selected="selected">Good</option>
-						  	<option th:value="fair">Fair</option>
+					  <select class="form-control input-sm" aria-describedby="itemproficiency-addon" id="languagemodalproficiency">
+						  	<option th:value="'Very Good'">Very Good</option>
+						  	<option th:value="Good" selected="selected">Good</option>
+						  	<option th:value="Fair">Fair</option>
+						  	<option th:value="Poor">Poor</option>
 						  </select>
 					</div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Add Language</button>
+		        <button type="button" id="languagemodalbtn" class="btn btn-primary">Add Language</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-	   <div class="modal fade" id="additionalmodal" style="margin-top: 50px;">
+		<div class="modal fade" id="languagemodaledit" style="margin-top: 50px;">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">Change Language</h4>
+				      </div>
+				      <div class="modal-body">
+				        <div class="input-group" style="margin:5px;width:85%;">
+							  <span class="input-group-addon" id="itemlanguage-addon"><i class="fa fa-feed fa-fw"></i></span>
+							  <input class="form-control input-sm notnull" type="text" id="languagemodallanguagedit" placeholder="Language" aria-describedby="language-addon"/>
+							  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+					  		  		<span id="inputError2Status" class="sr-only">(error)</span>
+							</div>
+					  	
+					  		<div class="input-group" style="margin:5px;width:85%;">
+							  <span class="input-group-addon" id="itemproficiency-addon"><i class="fa fa-feed fa-fw"></i></span>
+							  <select class="form-control input-sm" aria-describedby="itemproficiency-addon" id="languagemodalproficiencyedit">
+								  	<option th:value="'Very Good'">Very Good</option>
+								  	<option th:value="Good" selected="selected">Good</option>
+								  	<option th:value="Fair">Fair</option>
+								  	<option th:value="Poor">Poor</option>
+								</select>
+							</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" id="languagemodaleditbtn" class="btn btn-primary">Change Language</button>
+				      </div>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+	   	<div class="modal fade" id="additionalmodal" style="margin-top: 50px;">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -836,22 +935,47 @@
 		      <div class="modal-body" align="center">
 		      	<div class="input-group" style="margin:5px;width:85%;">
 				  <span class="input-group-addon" id="itemextra-addon"><i class="fa fa-info fa-fw"></i></span>
-				  <input class="form-control input-sm notnull" type="text" placeholder="Title" aria-describedby="itemextra-addon"/>
+				  <input class="form-control input-sm notnull" type="text" placeholder="Title" id="additionalmodaltitle" aria-describedby="itemextra-addon"/>
 				  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
 		  		  <span id="inputError2Status" class="sr-only">(error)</span>
 				</div>
 		        <div class="input-group" style="margin:5px;width:85%;">
-				  <textarea class="form-control input-sm" cols="20" rows="2" placeholder="Provide further Information"></textarea>
+				  <textarea class="form-control input-sm" cols="20" rows="2" id="additionalmodalfurther" placeholder="Provide further Information"></textarea>
 				</div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Add Information</button>
+		        <button type="button" id="additionalmodalbtn" class="btn btn-primary">Save Changes</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-    
+		<div class="modal fade" id="additionalmodaledit" style="margin-top: 50px;">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">Change Additional information</h4>
+				      </div>
+				      <div class="modal-body" align="center">
+				      	<div class="input-group" style="margin:5px;width:85%;">
+						  <span class="input-group-addon" id="itemextra-addon"><i class="fa fa-info fa-fw"></i></span>
+						  <input class="form-control input-sm notnull" type="text" placeholder="Title" id="additionalmodaltitleedit" aria-describedby="itemextra-addon"/>
+						  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+				  		  <span id="inputError2Status" class="sr-only">(error)</span>
+						</div>
+				        <div class="input-group" style="margin:5px;width:85%;">
+						  <textarea class="form-control input-sm" cols="20" rows="2" id="additionalmodalfurtheredit" placeholder="Provide further Information"></textarea>
+						</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" id="additionalmodaleditbtn" class="btn btn-primary">Save Changes</button>
+				      </div>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+		        
     
     </div>
     <script th:src="@{/js/jquery-1.11.2.min.js}" type="text/javascript"></script>  
@@ -1337,8 +1461,10 @@ $('#skillsmodalbtn').click(function (e) {
 				
 		if(skillstable.html() === ""){
 			var skillString = "";
+			
 			if(description != ""){
-				skillString = '<div class="skill">'
+				skillString = '<div class="skills">'
+					+'<div class="skill">'
 					+'<div>'
 					+ '<span><a style="cursor:pointer" class="skillremove"><i class="fa fa-close fa-fw"></i></a></span>'
 					+'</div>'
@@ -1346,7 +1472,7 @@ $('#skillsmodalbtn').click(function (e) {
 					+'<tr>'
 					+'<td>Skill:</td>'
 					+'<td class="skillname">'
-					+'<a style="cursor:pointer">'
+					+'<a  class="showskill"  style="cursor:pointer">'
 					+ name
 					+'</a>'
 					+'</td>'
@@ -1358,10 +1484,12 @@ $('#skillsmodalbtn').click(function (e) {
 					+'</td>'
 					+'</tr>'
 					+'</table>'
+					+'</div>'
 					+'</div>';
 			}else{
 				
-				skillString = '<div class="skill">'
+				skillString = '<div class="skills">'
+					+'<div class="skill">'
 					+'<div>'
 					+ '<span><a style="cursor:pointer" class="skillremove"><i class="fa fa-close fa-fw"></i></a></span>'
 					+'</div>'
@@ -1373,14 +1501,9 @@ $('#skillsmodalbtn').click(function (e) {
 					+ name
 					+'</a>'
 					+'</td>'
-					+'</tr>'
-					+'<tr>'
-					+'<td>Details:</td>'
-					+'<td class="skilldesc">'
-					+ description
-					+'</td>'
-					+'</tr>'
+					+'</tr>'					
 					+'</table>'
+					+'</div>'
 					+'</div>';
 				
 			}
@@ -1396,19 +1519,107 @@ $('#skillsmodalbtn').click(function (e) {
 				$('#skillsmodaledit').modal("show");
 				
 				var row = $(this).closest('table');
-				$('#skillmodalnameedit').val(row.find(".skillname").html());
-				$('#skillmodaldescriptionedit').val(row.find(".skilldesc").html());
+				$('#skillmodalnameedit').val(row.find(" tr .skillname a").html());
+				$('#skillmodaldescriptionedit').val(row.find("tr .skilldesc").html());	
 				
 				$('#skillmodaleditbtn').click(function (e) {
-					row.find(".skillname").val($('#skillmodalnameedit').val());
-					row.find(".skilldesc").html($('#skillmodaldescriptionedit').val());
+					row.find("tr .skillname a").html($('#skillmodalnameedit').val());
+					row.find("tr .skilldesc").html($('#skillmodaldescriptionedit').val());
 					$('#skillsmodaledit').modal("hide");
 				});
 				
 				
 			});
 			
+			$('.skillremove').click(function (e) {
+				$(this).closest('.skill').fadeOut(400,"swing",function(e){});				
+			});
+			
+			
+			
+			
+			
 		}else{
+			
+			
+			var skillString = "";
+			
+			if(description != ""){
+				skillString = '<div class="skills">'
+					+'<div class="skill">'
+					+'<div>'
+					+ '<span><a style="cursor:pointer" class="skillremove"><i class="fa fa-close fa-fw"></i></a></span>'
+					+'</div>'
+					+'<table class="table">'
+					+'<tr>'
+					+'<td>Skill:</td>'
+					+'<td class="skillname">'
+					+'<a  class="showskill"  style="cursor:pointer">'
+					+ name
+					+'</a>'
+					+'</td>'
+					+'</tr>'
+					+'<tr>'
+					+'<td>Details:</td>'
+					+'<td class="skilldesc">'
+					+ description
+					+'</td>'
+					+'</tr>'
+					+'</table>'
+					+'</div>'
+					+'</div>';
+			}else{
+				
+				skillString = '<div class="skills">'
+					+'<div class="skill">'
+					+'<div>'
+					+ '<span><a style="cursor:pointer" class="skillremove"><i class="fa fa-close fa-fw"></i></a></span>'
+					+'</div>'
+					+'<table class="table">'
+					+'<tr>'
+					+'<td>Skill:</td>'
+					+'<td class="skillname">'
+					+'<a class="showskill" style="cursor:pointer">'
+					+ name
+					+'</a>'
+					+'</td>'
+					+'</tr>'					
+					+'</table>'
+					+'<input type="hidden" class="showskillname1" value="'+name+'"/>'
+					+'<input type="hidden" class="showskilldesc1" value=""/>'
+					+'</div>'
+					+'</div>';
+				
+			}
+			
+			
+			
+			
+			$('#skillstable .skills .skill:last').after(skillString);
+			
+			$('#skillsmodal').modal("hide");
+			
+			$('.showskill').click(function (e) {
+				$('#skillsmodaledit').modal("show");
+				
+				var row = $(this).closest('table');
+				$('#skillmodalnameedit').val(row.find(" tr .skillname a").html());
+				$('#skillmodaldescriptionedit').val(row.find("tr .skilldesc").html());	
+				
+				$('#skillmodaleditbtn').click(function (e) {
+					row.find("tr .skillname a").html($('#skillmodalnameedit').val());
+					row.find("tr .skilldesc").html($('#skillmodaldescriptionedit').val());
+					$('#skillsmodaledit').modal("hide");
+				});
+				
+				
+			});
+			
+			$('.skillremove').click(function (e) {
+				$(this).closest('.skill').fadeOut(400,"swing",function(e){});				
+			});
+			
+			
 			
 		}
 		
@@ -1416,8 +1627,406 @@ $('#skillsmodalbtn').click(function (e) {
 });
 
 /*######################################################################*/
+/*####CONTACT##################################################################*/
+var contactCounter = 0;
+
+$('#contactmodalbtn').click(function (e) {
+	
+	contactCounter += 1;
+	var device = $('#contactmodaldevice').val();
+	var contact = $('#contactmodalcontact').val();
+	var contacttable = $('#contacttable');
+			
+	if(contacttable.html() === ""){
 		
-		//]]>
+		contacttable.html('<div class="row">'
+			  	+'<div class="col-lg-12">'			  
+				+'<table class="table">'
+				+'<tr>'					
+				+'<td class="contactdevice">'					
+				+'<b>'+device+'</b>:'					
+				+'</td>'
+				+'<td class="contactcontact">'
+				+'<a class="showcontact" style="cursor:pointer;">'
+				+contact	
+				+'</a>'
+				+'</td>'
+				+'<td width="10%">'					
+				+'<span><a style="cursor:pointer" class="contactremove"><i class="fa fa-close fa-fw"></i></a></span>'			
+				+'</td>'
+				+'</tr>'
+				+'</table>'
+				+'<input type="hidden" class="showcontactcontact" value="'+contact+'"/>'				
+				+'</div></div>');
+		
+		
+		$('#contactmodal').modal("hide");
+		
+		$('.showcontact').click(function (e) {
+			
+			var contactdevice = $(this).closest('tr').find('.contactdevice b');
+			var contactcontact = $(this).closest('tr').find('.contactcontact a');
+			$('#contactmodaledit').modal("show");
+			$('#contactmodaldeviceedit').val(contactdevice.html());
+			$('#contactmodalcontactedit').val(contactcontact.html());
+			
+			
+			$('#contactmodaleditbtn').click(function (e) {
+				contactdevice.html($('#contactmodaldeviceedit').val());
+				contactcontact.html($('#contactmodalcontactedit').val());
+				$('#contactmodaledit').modal("hide");
+			});
+			
+		});
+	}else{
+		
+
+		contacttable.find('.row:last').after('<div class="row">'
+			  	+'<div class="col-lg-12">'			  	
+				+'<table class="table">'
+				+'<tr>'					
+				+'<td class="contactdevice">'					
+				+'<b>'+device+'</b>:'					
+				+'</td>'
+				+'<td class="contactcontact">'
+				+'<a class="showcontact" style="cursor:pointer;">'
+				+contact	
+				+'</a>'
+				+'</td>'
+				+'<td width="10%">'					
+				+'<span><a style="cursor:pointer" class="contactremove"><i class="fa fa-close fa-fw"></i></a></span>'			
+				+'</td>'
+				+'</tr>'
+				+'</table>'							
+				+'</div>'				
+				+'</div>');
+		
+		
+		$('#contactmodal').modal("hide");
+		
+		$('.showcontact').click(function (e) {
+			
+			var contactdevice = $(this).closest('tr').find('.contactdevice b');
+			var contactcontact = $(this).closest('tr').find('.contactcontact a');
+			$('#contactmodaledit').modal("show");
+			$('#contactmodaldeviceedit').val(contactdevice.html());
+			$('#contactmodalcontactedit').val(contactcontact.html());
+			
+			
+			$('#contactmodaleditbtn').click(function (e) {
+				contactdevice.html($('#contactmodaldeviceedit').val());
+				contactcontact.html($('#contactmodalcontactedit').val());
+				$('#contactmodaledit').modal("hide");
+			});
+			
+		});
+	}
+	
+	$('.contactremove').click(function (e) {
+		$(this).closest('.row').fadeOut(400,"swing",function(e){});				
+	});
+	
+});
+		
+
+/*######################################################################*/
+
+/*####KIN CONTACT##################################################################*/
+var kincontactCounter = 0;
+
+$('#kincontactmodalbtn').click(function (e) {
+	
+	kincontactCounter += 1;
+	var kindevice = $('#kincontactmodaldevice').val();
+	var kincontact = $('#kincontactmodalcontact').val();
+	var kincontacttable = $('#kincontacttable');
+			
+	if(kincontacttable.html() === ""){
+		
+		kincontacttable.html('<div class="row" style="margin-top:15px;margin-left:5px;">'
+				+'<h5>'
+				+'<b>'
+				+'Next of Kin Contact Information'
+				+'</b>'
+				+'</h5>'
+				+'</div>'
+				+'<div class="row">'
+			  	+'<div class="col-lg-12">'			  
+				+'<table class="table">'
+				+'<tr>'					
+				+'<td class="kincontactdevice">'					
+				+'<b>'+kindevice+'</b>:'					
+				+'</td>'
+				+'<td class="kincontactcontact">'
+				+'<a class="showkincontact" style="cursor:pointer;">'
+				+kincontact	
+				+'</a>'
+				+'</td>'
+				+'<td width="10%">'					
+				+'<span><a style="cursor:pointer" class="kincontactremove"><i class="fa fa-close fa-fw"></i></a></span>'			
+				+'</td>'
+				+'</tr>'
+				+'</table>'
+				+'<input type="hidden" class="showkincontactcontact" value="'+kincontact+'"/>'				
+				+'</div></div>');
+		
+		
+		$('#kincontactmodal').modal("hide");
+		
+		$('.showkincontact').click(function (e) {
+			
+			var kincontactdevice = $(this).closest('tr').find('.kincontactdevice b');
+			var kincontactcontact = $(this).closest('tr').find('.kincontactcontact a');
+			$('#kincontactmodaledit').modal("show");
+			$('#kincontactmodaldeviceedit').val(kincontactdevice.html());
+			$('#kincontactmodalcontactedit').val(kincontactcontact.html());
+			
+			
+			$('#kincontactmodaleditbtn').click(function (e) {
+				kincontactdevice.html($('#kincontactmodaldeviceedit').val());
+				kincontactcontact.html($('#kincontactmodalcontactedit').val());
+				$('#kincontactmodaledit').modal("hide");
+			});
+			
+		});
+	}else{
+		
+
+		kincontacttable.find('.row:last').after('<div class="row">'
+			  	+'<div class="col-lg-12">'			  	
+				+'<table class="table">'
+				+'<tr>'					
+				+'<td class="kincontactdevice">'					
+				+'<b>'+kindevice+'</b>:'					
+				+'</td>'
+				+'<td class="kincontactcontact">'
+				+'<a class="showkincontact" style="cursor:pointer;">'
+				+kincontact	
+				+'</a>'
+				+'</td>'
+				+'<td width="10%">'					
+				+'<span><a style="cursor:pointer" class="kincontactremove"><i class="fa fa-close fa-fw"></i></a></span>'			
+				+'</td>'
+				+'</tr>'
+				+'</table>'							
+				+'</div>'				
+				+'</div>');
+		
+		
+		$('#kincontactmodal').modal("hide");
+		
+		$('.showkincontact').click(function (e) {
+			
+			var kincontactdevice = $(this).closest('tr').find('.kincontactdevice b');
+			var kincontactcontact = $(this).closest('tr').find('.kincontactcontact a');
+			$('#kincontactmodaledit').modal("show");
+			$('#kincontactmodaldeviceedit').val(kincontactdevice.html());
+			$('#kincontactmodalcontactedit').val(kincontactcontact.html());
+			
+			
+			$('#kincontactmodaleditbtn').click(function (e) {
+				kincontactdevice.html($('#kincontactmodaldeviceedit').val());
+				kincontactcontact.html($('#kincontactmodalcontactedit').val());
+				$('#kincontactmodaledit').modal("hide");
+			});
+			
+		});
+	}
+	
+	$('.kincontactremove').click(function (e) {
+		$(this).closest('.row').fadeOut(400,"swing",function(e){});				
+	});
+	
+});
+		
+
+/*######################################################################*/
+ 
+ 
+/*######LANGUAGE MODAL################################################################*/ 
+ $('#languagemodalbtn').click(function (e) {
+	
+	var language = $('#languagemodallanguage').val();
+	var proficiency = $('#languagemodalproficiency').val();
+	var languagetable = $('#origintable');
+			
+	if(languagetable.html() === ""){
+		languagetable.html('<table class="table">'
+				+'<tr><th>Language</th><th>Proficiency</th></tr>'
+				+'<tr>'	
+				+'<td class="language">'
+				+'<a class="showlanguage" style="cursor:pointer;">'
+				+language
+				+'</a>'
+				+'</td>'
+				+'<td class="proficiency">'					
+				+proficiency					
+				+'</td>'				
+				+'<td width="10%">'					
+				+'<span><a style="cursor:pointer" class="languageremove"><i class="fa fa-close fa-fw"></i></a></span>'			
+				+'</td>'
+				+'</tr>'
+				+'</table>'				
+			);
+		
+		$('#languagemodal').modal("hide");
+		
+		$('.showlanguage').click(function (e) {
+			
+			var lang = $(this).closest('tr').find('.language a');
+			var prof = $(this).closest('tr').find('.proficiency');
+			$('#languagemodaledit').modal("show");
+			$('#languagemodallanguagedit').val(lang.html());
+			$('#languagemodalproficiencyedit').val(prof.html());
+			
+			$('#languagemodaleditbtn').click(function (e) {
+				lang.html($('#languagemodallanguagedit').val());
+				prof.html($('#languagemodalproficiencyedit').val());
+				$('#languagemodaledit').modal("hide");
+			});
+		});
+		
+		}else{
+			languagetable.find('tr:last').after('<tr>'	
+					+'<td class="language">'
+					+'<a class="showlanguage" style="cursor:pointer;">'
+					+language
+					+'</a>'
+					+'</td>'
+					+'<td class="proficiency">'					
+					+proficiency					
+					+'</td>'				
+					+'<td width="10%">'					
+					+'<span><a style="cursor:pointer" class="languageremove"><i class="fa fa-close fa-fw"></i></a></span>'			
+					+'</td>'
+					+'</tr>'
+								
+				);
+			
+			$('#languagemodal').modal("hide");
+			
+			$('.showlanguage').click(function (e) {
+				
+				var lang = $(this).closest('tr').find('.language a');
+				var prof = $(this).closest('tr').find('.proficiency');
+				$('#languagemodaledit').modal("show");
+				$('#languagemodallanguagedit').val(lang.html());
+				$('#languagemodalproficiencyedit').val(prof.html());
+				
+				$('#languagemodaleditbtn').click(function (e) {
+					lang.html($('#languagemodallanguagedit').val());
+					prof.html($('#languagemodalproficiencyedit').val());
+					$('#languagemodaledit').modal("hide");
+				});
+			});
+		}
+	
+		$('.languageremove').click(function (e) {
+			$(this).closest('tr').fadeOut(400,"swing",function(e){});				
+		});
+		
+	});
+	
+/*######################################################################*/
+
+
+/*######ADDITONAL INFO MODAL################################################################*/ 
+	$('#additionalmodalbtn').click(function (e) {
+	
+	var title = $('#additionalmodaltitle').val();
+	var further = $('#additionalmodalfurther').val();
+	var additionaltable = $('#additionaltable');
+			
+	if(additionaltable.html() === ""){
+		additionaltable.html('<table class="table">'
+				+'<tr></tr>'
+				+'<tr>'	
+				+'<td>'
+				+'<div>'
+					+'<div class="row">'
+						+'<div class="col-lg-11 title">'
+							+'<a class="showtitle" style="cursor:pointer;">'
+							+title
+							+'</a>'
+						+'</div>'
+						+'<div class="col-lg-1">'
+							+'<span><a style="cursor:pointer" class="additionalremove"><i class="fa fa-close fa-fw"></i></a></span>'
+						+'</div>'
+					+'</div>'
+					+'<div class="further">'					
+						+further					
+					+'</div>'						
+				+'</div>'
+				+'</td>'
+				+'</tr>'
+				+'</table>'				
+			);
+		
+		$('#additionalmodal').modal("hide");
+		
+		$('.showtitle').click(function (e) {
+			
+			var title = $(this).closest('tr').find('.title a');
+			var further = $(this).closest('tr').find('.further');
+			$('#additionalmodaledit').modal("show");
+			$('#additionalmodaltitleedit').val(title.html());
+			$('#additionalmodalfurtheredit').val(further.html());
+			
+			$('#additionalmodaleditbtn').click(function (e) {
+				title.html($('#additionalmodaltitleedit').val());
+				further.html($('#additionalmodalfurtheredit').val());
+				$('#additionalmodaledit').modal("hide");
+			});
+		});
+		
+		}else{
+			additionaltable.find('tr:last').after('<tr>'	
+					+'<td>'
+					+'<div>'
+						+'<div class="row">'
+							+'<div class="col-lg-11 title">'
+								+'<a class="showtitle" style="cursor:pointer;">'
+								+title
+								+'</a>'
+							+'</div>'
+							+'<div class="col-lg-1">'
+								+'<span><a style="cursor:pointer" class="additionalremove"><i class="fa fa-close fa-fw"></i></a></span>'
+							+'</div>'
+						+'</div>'
+						+'<div class="further">'					
+							+further					
+						+'</div>'						
+					+'</div>'
+					+'</td>'
+					+'</tr>'
+								
+				);
+			
+			$('#additionalmodal').modal("hide");
+			
+			$('.showtitle').click(function (e) {
+				
+				var title = $(this).closest('tr').find('.title a');
+				var further = $(this).closest('tr').find('.further');
+				$('#additionalmodaledit').modal("show");
+				$('#additionalmodaltitleedit').val(title.html());
+				$('#additionalmodalfurtheredit').val(further.html());
+				
+				$('#additionalmodaleditbtn').click(function (e) {
+					title.html($('#additionalmodaltitleedit').val());
+					further.html($('#additionalmodalfurtheredit').val());
+					$('#additionalmodaledit').modal("hide");
+				});
+			});
+		}
+	
+		$('.additionalremove').click(function (e) {
+			$(this).closest('tr').fadeOut(400,"swing",function(e){});				
+		});
+		
+	});
+/*######################################################################*/
+	//]]>
 	    </script>
 	  </div>
     
