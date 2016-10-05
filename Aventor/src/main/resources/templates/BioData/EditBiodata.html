@@ -26,7 +26,7 @@
     <body style="background-color:#fcfcfc; font-family:'Raleway',sans-serif;">
    
      <div layout:fragment="page-heading">
-		<span style="font-size:220%; margin-left:5px;">Bio-Data/New Entry</span>
+		<span style="font-size:220%; margin-left:5px;">Bio-Data/Edit Entry</span>
     </div> 
     
    	 <div layout:fragment="page-heading-buttons" align="right">
@@ -34,9 +34,8 @@
 	   		<a href="#" th:href="@{/biodata/view}" class="btn btn-info btn-sm" id="viewEntries"><i class="fa fa-users" style="margin-right: 5px;"></i>View All</a>	
 	   	</div>
     	<div style="float:right;margin-left:5px;" data-toggle="modal" data-target="#inventory-modal">
-	   		<a href="#" class="btn btn-info btn-sm" id="saveEntry"><i class="fa fa-th" style="margin-right: 5px;"></i>Add Entry</a>	
-	   	</div>  
-	      	                       	
+	   		<a href="#" class="btn btn-info btn-sm" id="saveEntry"><i class="fa fa-th" style="margin-right: 5px;"></i>Save Entry</a>	
+	   	</div>    	                       	
     </div> 
 
     
@@ -1143,8 +1142,7 @@
  
  
  $('#addressmodalbtn').click(function (e) {
-	 	addressIndex = addressCounter;
-	 	addressCounter += 1;
+	    addressCounter += 1;
 	 	var name = $('#addressmodalname').val();
 		var postaladdress = $('#addressmodalpostaladdress').val();
 		var district = $('#addressmodaldistrict').val();
@@ -1197,15 +1195,15 @@
 					+'</td>'
 					+'</tr>'
 					+'</table>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].addressname}" name="addresses['+addressIndex+'].addressname" class="showaddressname" value="'+name+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].description}" name="addresses['+addressIndex+'].description" class="showaddressdesc" value="'+description+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].postaladdress}"  name="addresses['+addressIndex+'].postaladdress" class="showaddresspostaladdress" value="'+postaladdress+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].district}"  name="addresses['+addressIndex+'].district" class="showaddressdistrict" value="'+district+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].village}"  name="addresses['+addressIndex+'].village" class="showaddressvillage" value="'+village+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].county}"  name="addresses['+addressIndex+'].county" class="showaddresscounty" value="'+county+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].country}"  name="addresses['+addressIndex+'].country" class="showaddresscountry" value="'+country+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].subcounty}"  name="addresses['+addressIndex+'].subcounty" class="showaddresssubcounty" value="'+subcounty+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].parish}"  name="addresses['+addressIndex+'].parish" class="showaddressparish" value="'+parish+'"/>'
+					+'<input type="hidden" class="showaddressname" value="'+name+'"/>'
+					+'<input type="hidden" class="showaddressdesc" value="'+description+'"/>'
+					+'<input type="hidden" class="showaddresspostaladdress" value="'+postaladdress+'"/>'
+					+'<input type="hidden" class="showaddressdistrict" value="'+district+'"/>'
+					+'<input type="hidden" class="showaddressvillage" value="'+village+'"/>'
+					+'<input type="hidden" class="showaddresscounty" value="'+county+'"/>'
+					+'<input type="hidden" class="showaddresscountry" value="'+country+'"/>'
+					+'<input type="hidden" class="showaddresssubcounty" value="'+subcounty+'"/>'
+					+'<input type="hidden" class="showaddressparish" value="'+parish+'"/>'
 					+'</div></div>');
 			
 			
@@ -1284,15 +1282,15 @@
 					+ addressString						
 					+'</td>'
 					+'</tr></table>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].addressname}" name="addresses['+addressIndex+'].addressname" class="showaddressname" value="'+name+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].description}" name="addresses['+addressIndex+'].description" class="showaddressdesc" value="'+description+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].postaladdress}"  name="addresses['+addressIndex+'].postaladdress" class="showaddresspostaladdress" value="'+postaladdress+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].district}"  name="addresses['+addressIndex+'].district" class="showaddressdistrict" value="'+district+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].village}"  name="addresses['+addressIndex+'].village" class="showaddressvillage" value="'+village+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].county}"  name="addresses['+addressIndex+'].county" class="showaddresscounty" value="'+county+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].country}"  name="addresses['+addressIndex+'].country" class="showaddresscountry" value="'+country+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].subcounty}"  name="addresses['+addressIndex+'].subcounty" class="showaddresssubcounty" value="'+subcounty+'"/>'
-					+'<input type="hidden" th:field="*{addresses['+addressIndex+'].parish}"  name="addresses['+addressIndex+'].parish" class="showaddressparish" value="'+parish+'"/>'
+					+'<input type="hidden" class="showaddressname" value="'+name+'"/>'
+					+'<input type="hidden" class="showaddressdesc" value="'+description+'"/>'
+					+'<input type="hidden" class="showaddresspostaladdress" value="'+postaladdress+'"/>'
+					+'<input type="hidden" class="showaddressdistrict" value="'+district+'"/>'
+					+'<input type="hidden" class="showaddressvillage" value="'+village+'"/>'
+					+'<input type="hidden" class="showaddresscounty" value="'+county+'"/>'
+					+'<input type="hidden" class="showaddresscountry" value="'+country+'"/>'
+					+'<input type="hidden" class="showaddresssubcounty" value="'+subcounty+'"/>'
+					+'<input type="hidden" class="showaddressparish" value="'+parish+'"/>'
 					+'</div>');
 			
 			$('#addressmodal').modal("hide");
@@ -1339,13 +1337,8 @@
  
  
 /*######INSTITUTION MODAL################################################################*/
- 
- 
- 		var institutionCounter = 0;
- 		
 		$('#institutionmodalbtn').click(function (e) {
-			institutionIndex = addressCounter;
-			institutionCounter += 1;
+	    
 	 	var name = $('#institutionmodalname').val();
 		var location = $('#institutionmodallocation').val();
 		var award = $('#institutionmodalaward').val();
@@ -1361,10 +1354,10 @@
 			+'</tr>'
 			+'<tr>'	
 			+'<td><a class="showinstitution" style="cursor:pointer;">'+ name +'</a>'
-			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].name}" name="learninginstitutions['+institutionIndex+'].name" class="showinstitutionname" value="'+name+'" th:value="'+name+'"/>'
-			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].location}" name="learninginstitutions['+institutionIndex+'].location" class="showinstitutionlocation" value="'+location+'" th:value="'+location+'"/>'
-			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].awardswithyears.key}" name="learninginstitutions['+institutionIndex+'].awardswithyears.key" class="showinstitutionaward" value="'+award+'" th:value="'+award+'"/>'
-			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].awardswithyears.value}" name="learninginstitutions['+institutionIndex+'].awardswithyears.value" class="showinstitutionyear" value="'+year+'" th:value="'+year+'"/>'			
+			+'<input type="hidden" class="showinstitutionname" value="'+name+'"/>'
+			+'<input type="hidden" class="showinstitutionlocation" value="'+location+'"/>'
+			+'<input type="hidden" class="showinstitutionaward" value="'+award+'"/>'
+			+'<input type="hidden" class="showinstitutionyear" value="'+year+'"/>'			
 			+'</td>'
 			+'<td class="showaward">'+ award +'</td>'
 			+'<td class="showyear">'+ year +'</td>'	
@@ -1405,15 +1398,15 @@
 			
 			institutiontable.find('table tr:last').after('<tr>'	
 					+'<td><a class="showinstitution" style="cursor:pointer;">'+ name +'</a>'
-					+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].name}" name="learninginstitutions['+institutionIndex+'].name" class="showinstitutionname" value="'+name+'"/>'
-					+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].location}" name="learninginstitutions['+institutionIndex+'].location" class="showinstitutionlocation" value="'+location+'"/>'
-					+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].awardswithyears.key}" name="learninginstitutions['+institutionIndex+'].awardswithyears.key" class="showinstitutionaward" value="'+award+'"/>'
-					+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].awardswithyears.value}" name="learninginstitutions['+institutionIndex+'].awardswithyears.value" class="showinstitutionyear" value="'+year+'"/>'			
+					+'<input type="hidden" class="showinstitutionname" value="'+name+'"/>'
+					+'<input type="hidden" class="showinstitutionlocation" value="'+location+'"/>'
+					+'<input type="hidden" class="showinstitutionaward" value="'+award+'"/>'
+					+'<input type="hidden" class="showinstitutionyear" value="'+year+'"/>'			
 					+'</td>'
 					+'<td class="showaward">'+ award +'</td>'
 					+'<td class="showyear">'+ year +'</td>'		
 					+'<td class="removeinstitution">'
-					+ '<span><a style="cursor:pointer"><i class="fa fa-close fa-fw"></i></a></span>'
+					+ '<span><a style="cursor:pointer" class="addressremove"><i class="fa fa-close fa-fw"></i></a></span>'
 					+'</td>'
 					+'</tr>'					
 					);

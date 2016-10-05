@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:security="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Layout/Layout">
+      
+    <head>
+        <title>Bio-Data</title>
+        <link rel="stylesheet" th:href="@{/css/fonts/fonts.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/jquery-ui.css}" type="text/css"/>
+	    <link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+	    <link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap-theme.min.css}" type="text/css" />
+	    <link rel="stylesheet" th:href="@{/css/font-awesome-4.5.0/css/font-awesome.min.css}" type="text/css" />
+	    <link rel="stylesheet" th:href="@{/css/welcome.css}" type="text/css"/>
+	    <style type="text/css">
+	    	.ui-widget{
+	    		font-family:'Raleway',sans-serif;
+	    	}
+	    	.eventmarker{
+	    		background-image: url('/Aventor/images/Marker.png');	    		
+	    		background-repeat: no-repeat;
+	    	}
+	    </style>
+    </head>    
+    
+    <body style="background-color:#fcfcfc; font-family:'Raleway',sans-serif;">
+   
+     <div layout:fragment="page-heading">
+		<span style="font-size:220%; margin-left:5px;">Bio-Data/Entry Information</span>
+    </div> 
+    
+   	 <div layout:fragment="page-heading-buttons" align="right">
+   	 
+   	 	<div style="float:right;margin-left:5px;" data-toggle="modal" data-target="#inventory-modal">
+	   		<a href="#" class="btn btn-info btn-sm" th:href="@{/biodata/entry/{entryId}/delete(entryId=${biodata.id})}" id="deleteEntry"><i class="fa fa-trash-o" style="margin-right: 5px;"></i>Delete Entry</a>	
+	   	</div> 
+    	<div style="float:right;margin-left:5px;" data-toggle="modal" data-target="#inventory-modal">
+	   		<a href="#" th:href="@{/biodata/entry/{entryId}/edit(entryId=${biodata.id})}" class="btn btn-info btn-sm" id="editEntry"><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit Entry</a>	
+	   	</div>
+	   	<div style="float:right;margin-left:5px;" data-toggle="modal" data-target="#inventory-modal">
+	   		<a href="#" th:href="@{/biodata/new}" class="btn btn-info btn-sm" id="newEntry"><i class="fa fa-th" style="margin-right: 5px;"></i>Create New Entry</a>	
+	   	</div>
+	   	<div style="float:right;margin-left:5px;" data-toggle="modal" data-target="#inventory-modal">
+	   		<a href="#" th:href="@{/biodata/view}" class="btn btn-info btn-sm" id="viewEntries"><i class="fa fa-users" style="margin-right: 5px;"></i>View All</a>	
+	   	</div>  
+	   	<div style="float:right;margin-left:5px;" data-toggle="modal" data-target="#inventory-modal">
+	   		<a href="#"  class="btn btn-info btn-sm" id="printEntry"><i class="fa fa-print" style="margin-right: 5px;"></i>Print</a>	
+	   	</div>   	                       	
+    </div> 
+
+    
+    <div layout:fragment="page-content-area">
+    
+    <div th:object="${biodata}" id="entryinfo">
+    
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2">					
+					<div style="border-top: 2px #AAFFDD solid;  background-color:#fff; width:150px; height: 150px;">
+						  <img src="/Aventor/images/pic02.jpg" th:src="@{/images/pic02.jpg}" alt="..." width="150px" height="120px"/>
+					      <div style="margin-top:5px;">					        
+					        <div class="well well-sm" style="font-size: 150%; margin:0px; padding:0px;" align="center"><label><i class="fa fa-user fa-fw"></i></label></div>
+					      </div>
+					</div>  	
+				</div>
+				
+				<div class="col-lg-10">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Personal Information</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;height:100%;">
+					  	<div class="container-fluid">
+						  	<div class="row">
+							  	<div class="col-lg-3">
+								  	<table class="table table-hover">
+									  	<tr><th><label>First Name: </label></th><td th:text="*{firstname}">John</td></tr>
+									  	<tr><th><label>Surname: </label></th><td th:text="*{lastname}">Doe</td></tr>
+									  	<tr><th><label>Other Names: </label></th><td th:text="*{othernames}">Kifeesi</td></tr>
+									  	<tr><th><label>Gender: </label></th><td th:text="*{gender}">Male</td></tr>
+								  	</table>
+							  	</div>
+							  	<div class="col-lg-3">
+							  		<table class="table table-hover">
+									  	<tr><th><label>Nationality: </label></th><td th:text="*{nationality}">Ugandan</td></tr>
+									  	<tr><th><label>Religion: </label></th><td th:text="*{religion}">Catholic</td></tr>
+									  	<tr><th><label>Marital status: </label></th><td th:text="*{maritalstatus}">Married</td></tr>
+									  	<tr><th><label>Occupation: </label></th><td th:text="*{occupation}">Business Man</td></tr>
+								  	</table>
+							  	</div>
+							  	<div class="col-lg-4">
+							  		<table class="table table-hover">
+									  	<tr><th><label>Date of Birth: </label></th><td th:text="*{#calendars.format(birthday,'dd MMMM yyyy')}">1/1/1990</td></tr>
+									  	<tr><th><label>Next of Kin: </label></th><td th:text="*{nextofkin}">Jane Doe</td></tr>
+									  	<tr><th><label>Relationship:</label></th><td th:text="*{nextofkinrelation}">Wife</td></tr>
+									  	<tr><th><label>Entry brief: </label></th><td th:text="*{brief}"></td></tr>
+								  	</table>							  		
+							  	</div>	
+							</div>				  		
+					  	</div>
+					  </div>
+					</div>  	
+				</div>
+				
+			</div>
+			
+			<div style="width:100%;border:1px #dddddd solid;margin-top:10px;"></div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+<!-- _________!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!______________ -->			
+			<div class="row" style="margin-top:30px;padding:0px;">
+				
+				
+				<div class="col-lg-3">				
+					
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">History/Experience</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;height:100%;">
+					  <div id="eventtable"></div>
+					    Enter significant Events that took place at some point in time. 
+					    <p style="margin-top: 5px;"><a href="#" data-toggle="modal" data-target="#eventsmodal">+ Add Event</a></p>
+					  </div>
+					</div>          	
+				</div>
+				
+				<div class="col-lg-5" align="left">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Address Information</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					  	<div th:each="address, iterstatus : ${biodata.addresses}" class="col-lg-6 address">
+					  		<div style="color: #337ab7;">
+					  			<label th:text="'Address '+${iterstatus.count}">Address: </label>
+					  		</div>
+					  		<table style="border-top: 1px #CCCCCC solid;">
+					  			<tr th:if="${not #strings.isEmpty(address.addressname)}"><td><label>Address: </label></td><td style="padding-left: 5px;"><div th:text="${address.addressname}+','"></div></td></tr>	
+					  			<tr th:if="${not #strings.isEmpty(address.postaladdress)}"><td><label>Postal Address: </label></td><td style="padding-left: 5px;"><div th:text="${address.postaladdress}+','" ></div></td></tr>
+								<tr th:if="${not #strings.isEmpty(address.village)}"><td><label>Village: </label></td><td style="padding-left: 5px;"><div th:text="${address.village}+','" ></div></td></tr>	
+								<tr th:if="${not #strings.isEmpty(address.subcounty)}"><td><label>Sub-county: </label></td><td style="padding-left: 5px;"><div th:text="${address.subcounty}+','" ></div></td></tr>	
+								<tr th:if="${not #strings.isEmpty(address.county)}"><td><label>County: </label></td><td style="padding-left: 5px;"><div th:text="${address.county}+','" ></div></td></tr>											  			
+								<tr th:if="${not #strings.isEmpty(address.district)}"><td><label>District: </label></td><td style="padding-left: 5px;"><div th:text="${address.district}+','"></div></td></tr>	
+								<tr th:if="${not #strings.isEmpty(address.country)}"><td><label>Country: </label></td><td style="padding-left: 5px;"><div th:text="${address.country}+','" ></div></td></tr>				  			
+								<tr th:if="${not #strings.isEmpty(address.description)}"><td><label>Further information: </label></td><td style="padding-left: 5px;"><div th:text="${address.description}+','" ></div></td></tr>
+							</table>
+							</div>
+					  </div>
+					</div>  
+					
+					 <div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Education Background</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					  <div>
+					  	<table class="table">
+					  		<tr>
+					  			<th>Institution</th>
+					  			<th>Award</th>
+					  			<th>Year</th>
+					  		</tr>
+					  		<tr th:each="institutions, iterstatus : ${biodata.learninginstitutions}">
+					  			<td th:text="${institutions.name}+', '+${institutions.location}">Institution</td>
+					  			<td th:text="${institutions.awardswithyears.key}">Award</td>
+					  			<td th:text="${institutions.awardswithyears.value}">Year</td>
+					  		</tr>
+					  	</table>
+					  </div>
+					  </div>
+					</div>
+					
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Skills</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					  <div id="skillstable"></div>
+					    Provide skills and abilities possessed by this entry. <a href="#" data-toggle="modal" data-target="#skillsmodal">+ Add Skill</a>
+					  </div>
+					</div>   
+				</div>
+				 
+				<div class="col-lg-4">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Contact Information</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					  	<div id="contacttable"></div>
+					    Provide Entry's contact information. <a href="#" data-toggle="modal" data-target="#contactmodal">+ Add Contact</a>
+					    <div style="width:100%; border: 1px #ccc solid;"></div>
+					    <div id="kincontacttable"></div>
+					    Provide Entry's next of kin contact information. <a href="#" data-toggle="modal" data-target="#kincontactmodal">+ Add Contact</a>
+					  </div>
+					</div> 
+					
+					
+					  
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Origin</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:85%;">
+					    
+					  	<div class="row">
+						  	<div style="float: left;">
+						  		<div class="input-group" style="margin:5px;width:85%;">
+								  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
+								  <input class="form-control input-sm notnull" type="text" placeholder="Home District" th:field="*{origindistrict}" name="origindistrict" aria-describedby="itemorigin-addon"/>
+								  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+		  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+								</div>
+						  	</div>
+						  	<div style="float: left;">
+						  		<div class="input-group" style="margin:5px;width:85%;">
+								  <span class="input-group-addon" id="itemtribe-addon"><i class="fa fa-map fa-fw"></i></span>
+								  <input class="form-control input-sm notnull" type="text" placeholder="Tribe" th:field="*{tribe}" name="tribe" aria-describedby="itemtribe-addon"/>
+								  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+		  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+								</div>
+						  	</div>
+					  	</div>
+					  	<div class="row">
+						  	<div style="float: left;">
+						  		<div class="input-group" style="margin:5px;width:85%;">
+								<span class="input-group-addon" id="itemhomelanguage-addon"><i class="fa fa-map fa-fw"></i></span>
+								<input class="form-control input-sm notnull" type="text" placeholder="Home language" th:field="*{homelanguage}" name="homelanguage" aria-describedby="itemhomelanguage-addon"/>
+								<span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+	  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+							</div>
+						  	</div>
+						  	<div style="float: left;">
+						  		<div class="input-group" style="margin:5px;width:85%;">
+								  <span class="input-group-addon" id="itempreferredlanguage-addon"><i class="fa fa-map fa-fw"></i></span>
+								  <input class="form-control input-sm notnull" type="text" placeholder="Preferred language" th:field="*{preferredlanguage}" name="preferredlanguage" aria-describedby="itempreferredlanguage-addon"/>
+								  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+		  			  				<span id="inputError2Status" class="sr-only">(error)</span>
+								</div>
+						  	</div>
+					  	</div>
+					  	<div id="origintable" style="margin-top:10px;"></div>
+					  	<p style="margin-top: 5px;">Entry may speak more languages. <a href="#" data-toggle="modal" data-target="#languagemodal">+ Add Language</a></p>
+					  </div>
+					</div>
+					  
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Other Information</h3>
+					  </div>
+					  <div class="panel-body" style="font-size:80%;">
+					  <div id="additionaltable"></div>
+					    There may be additional information about the entry this form is not able to capture.
+					    <p style="margin-top: 5px;"><a href="#" data-toggle="modal" data-target="#additionalmodal">+ Add More Information</a></p>
+					    
+					  </div>
+					</div>            	
+				</div>
+				
+			</div>
+			
+			
+			
+		</div>
+		
+		
+		
+		</div>
+	</div>
+	
+	<div layout:fragment="loader">
+		<!-- Loader -->
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="newitem-modal" style="height:150px;" id="newitem-modal">
+		  <div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+		    <div align="center">Loading</div>
+		    <div align="center"> <i class="fa fa-cog fa-spin fa-5x"></i></div>		     
+		    </div>
+		  </div>
+		</div>
+	   
+    
+    </div>
+    <script th:src="@{/js/jquery-1.11.2.min.js}" type="text/javascript"></script>  
+    <script th:src="@{/js/jquery-ui.js}" type="text/javascript"></script> 
+	<script th:src="@{/js/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+    
+    <div layout:fragment="script">
+	    <script type="text/javascript" th:inline="javascript">
+	    //<![CDATA[
+	  
+	   
+
+		//]]>
+	    </script>
+	  </div>
+    
+    </body>
+</html>

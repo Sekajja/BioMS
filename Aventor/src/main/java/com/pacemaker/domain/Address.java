@@ -37,5 +37,114 @@ public class Address implements Serializable {
 	private String addressname;
 	@ManyToOne
 	private AventorUser user;
+	
+	
+	public Address() {
+		
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getCounty() {
+		return county;
+	}
+
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+
+	public String getCountry() {
+		return country;
+	}
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+	public String getSubcounty() {
+		return subcounty;
+	}
+
+
+	public void setSubcounty(String subcounty) {
+		this.subcounty = subcounty;
+	}
+
+
+	public String getDistrict() {
+		return district;
+	}
+
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+
+	public String getVillage() {
+		return village;
+	}
+
+
+	public void setVillage(String village) {
+		this.village = village;
+	}
+
+
+	public String getPostaladdress() {
+		return postaladdress;
+	}
+
+
+	public void setPostaladdress(String postaladdress) {
+		this.postaladdress = postaladdress;
+	}
+
+
+	public String getAddressname() {
+		return addressname;
+	}
+
+
+	public void setAddressname(String addressname) {
+		this.addressname = addressname;
+	}
+
+
+	public AventorUser getUser() {
+		return user;
+	}
+
+
+	public void setUser(AventorUser user) {
+		this.user = user;
+	}
+	
+	
+	
+	
 		
 }

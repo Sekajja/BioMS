@@ -35,6 +35,7 @@ public class LearningInstitution implements Serializable {
 	
 	@ElementCollection
 	private Map<String, String> awardswithyears = new HashMap<String, String>(0);
+		
 	
 	/*
 	 * For later

@@ -13,7 +13,7 @@ public class AventorMVC extends WebMvcConfigurerAdapter {
 		super.addViewControllers(registry);		
 		registry.addViewController("/login").setViewName("Login");
 		registry.addViewController("/about").setViewName("About");
-		registry.addViewController("/biodata/new").setViewName("BioData/NewBiodata");
+		//registry.addViewController("/biodata/new").setViewName("BioData/NewBiodata");
 		
 	}
 
