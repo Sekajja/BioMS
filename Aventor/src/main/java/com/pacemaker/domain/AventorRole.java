@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 public class AventorRole {
 	
 	public static final String AdministratorRole = "ADMIN";
+	public static final String ManagerRole = "MANAGER";
 	public static final String UserRole = "USER";
 	public static final String SystemAdministratorRole = "SYSADMIN";
 

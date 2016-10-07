@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
 public class Event implements Serializable {
 
@@ -23,22 +21,20 @@ public class Event implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column
-	@NotEmpty(message="Please provide an Event")	
+	@Column		
 	private String event;
 	
 	@Column	
 	private String description;
 	
-	@Column
-	@NotEmpty(message="Please provide a start date")
-	private String start;
+	@Column	
+	private String eventstart;
 	
 	@Column	
-	private String end;
+	private String eventend;
 	
 	@ManyToOne
-	private AventorUser user;
+	private BioData biodata;
 	
 	
 	
@@ -70,28 +66,30 @@ public class Event implements Serializable {
 		this.description = description;
 	}
 
-	public String getStart() {
-		return start;
+	
+	
+	public String getEventstart() {
+		return eventstart;
 	}
 
-	public void setStart(String start) {
-		this.start = start;
+	public void setEventstart(String eventstart) {
+		this.eventstart = eventstart;
 	}
 
-	public String getEnd() {
-		return end;
+	public String getEventend() {
+		return eventend;
 	}
 
-	public void setEnd(String end) {
-		this.end = end;
+	public void setEventend(String eventend) {
+		this.eventend = eventend;
 	}
 
-	public AventorUser getUser() {
-		return user;
+	public BioData getBiodata() {
+		return biodata;
 	}
 
-	public void setUser(AventorUser user) {
-		this.user = user;
+	public void setBiodata(BioData biodata) {
+		this.biodata = biodata;
 	}
 	
 }

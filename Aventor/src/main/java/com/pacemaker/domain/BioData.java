@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -108,35 +107,33 @@ public class BioData implements Serializable{
 	private String preferredlanguage;
 	
 	@ElementCollection
-	private Map<String,String> languageproficiency = new HashMap<String,String>(0);
-		
-	//Education Background	
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<LearningInstitution> learninginstitutions = new ArrayList<LearningInstitution>(0);
-	
+	private Map<String,String> languageproficiency = new HashMap<String,String>(0);	
 	
 	//Skills with description and chronological events and date
 	@ElementCollection
-	private Map<String,String> skills = new HashMap<String,String>(0);
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Event> events = new ArrayList<Event>(0);
+	private Map<String,String> skills = new HashMap<String,String>(0);	
 	
 	//Phone Information
 	@ElementCollection
 	private Map<String,String> phonenumbers = new HashMap<String,String>(0);
 	
 	@ElementCollection
-	private Map<String,String> nextofkinphonenumbers = new HashMap<String,String>(0);
-	
-	//Address Information
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Address> addresses = new ArrayList<Address>(0);
+	private Map<String,String> nextofkinphonenumbers = new HashMap<String,String>(0);	
 	
 	//Other Information
 	@ElementCollection
 	private Map<String,String> otherinformation = new HashMap<String,String>(0);
 
+	//Education Background	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<LearningInstitution> learninginstitutions = new ArrayList<LearningInstitution>(0);
+	
+	//Address Information
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Address> addresses = new ArrayList<Address>(0);
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Event> events = new ArrayList<Event>(0);
 	
 	public BioData() {
 		super();

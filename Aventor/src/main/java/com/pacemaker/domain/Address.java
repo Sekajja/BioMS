@@ -36,7 +36,9 @@ public class Address implements Serializable {
 	@Column
 	private String addressname;
 	@ManyToOne
-	private AventorUser user;
+	private AventorUser user;	
+	@ManyToOne
+	private BioData biodata;
 	
 	
 	public Address() {
@@ -143,7 +145,14 @@ public class Address implements Serializable {
 		this.user = user;
 	}
 	
-	
+	public BioData getBiodata() {
+		return biodata;
+	}
+
+
+	public void setBiodata(BioData biodata) {
+		this.biodata = biodata;
+	}
 	
 	
 		

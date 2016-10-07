@@ -71,10 +71,13 @@ public class BiodataController {
 	}
 	
 	@RequestMapping(value="/biodata/entry/{id}/delete", method=RequestMethod.GET)
-	public String deleteEntry(@PathVariable long id){
+	public String deleteEntry(@PathVariable long id, Model model){
 		
 		
 		bioDataService.deleteBioData(id);
+		
+		List<BioData> entries  = bioDataService.getAllBioData();
+		model.addAttribute("entries", entries);
 		
 		return "BioData/ViewBiodata";
 	}

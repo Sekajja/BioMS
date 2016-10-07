@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:security="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Layout/Layout">
+      
+    <head>
+        <title>Bio-Data</title>
+        <link rel="stylesheet" th:href="@{/css/fonts/fonts.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/jquery-ui.css}" type="text/css"/>
+	    <link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.min.css}" type="text/css"/>
+	    <link rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap-theme.min.css}" type="text/css" />
+	    <link rel="stylesheet" th:href="@{/css/font-awesome-4.5.0/css/font-awesome.min.css}" type="text/css" />
+	    <link rel="stylesheet" th:href="@{/css/welcome.css}" type="text/css"/>
+	    <style type="text/css">
+	    	.ui-widget{
+	    		font-family:'Raleway',sans-serif;
+	    	}
+	    	.eventmarker{
+	    		background-image: url('/Aventor/images/Marker.png');	    		
+	    		background-repeat: no-repeat;
+	    	}
+	    </style>
+    </head>    
+    
+    <body style="background-color:#fcfcfc; font-family:'Raleway',sans-serif;">
+   
+     <div layout:fragment="page-heading">
+		<span style="font-size:220%; margin-left:5px;">Bio-Data/Entry Information</span>
+    </div> 
+    
+   	 <div layout:fragment="page-heading-buttons" align="right">   	  
+	   	<div style="float:right;margin-left:5px;" data-toggle="modal" data-target="#inventory-modal">
+	   		<a href="#"  class="btn btn-info btn-sm" id="printEntry"><i class="fa fa-print" style="margin-right: 5px;"></i>View Users</a>	
+	   	</div>   	                       	
+    </div> 
+
+    
+    <div layout:fragment="page-content-area">
+    
+	</div>
+	
+	
+	
+	<div layout:fragment="loader">
+		<!-- Loader -->
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="newitem-modal" style="height:150px;" id="newitem-modal">
+		  <div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+		    <div align="center">Loading</div>
+		    <div align="center"> <i class="fa fa-cog fa-spin fa-5x"></i></div>		     
+		    </div>
+		  </div>
+		</div>
+	   
+    
+    </div>
+    
+    <script th:src="@{/js/jquery-1.11.2.min.js}" type="text/javascript"></script>  
+    <script th:src="@{/js/jquery-ui.js}" type="text/javascript"></script> 
+	<script th:src="@{/js/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+    
+    
+    
+    <div layout:fragment="script">
+	    <script type="text/javascript" th:inline="javascript">
+	    //<![CDATA[
+	  
+	   
+
+		//]]>
+	    </script>
+	 </div>
+    
+    </body>
+</html>

@@ -136,9 +136,26 @@
 					    <h3 class="panel-title">History/Experience</h3>
 					  </div>
 					  <div class="panel-body" style="font-size:85%;height:100%;">
-					  <div id="eventtable"></div>
-					    Enter significant Events that took place at some point in time. 
-					    <p style="margin-top: 5px;"><a href="#" data-toggle="modal" data-target="#eventsmodal">+ Add Event</a></p>
+					  <div>
+					  	<table class="table">
+						<tr th:with="today=${#calendars.createNow()}">
+						<td width="45%" align="right" height="60px" valign="middle" style="padding-top: 20px;" th:text="${#calendars.format(today,'dd MMMM yyyy')}">
+											
+						</td>
+						<td class="eventmarker"></td>
+						<td width="45%"></td>
+						</tr>
+						<tr th:each="event, iterstatus : ${biodata.events}">
+						<td width="45%" align="right" height="60px" valign="middle">
+							<div>	
+								<div style="float:left; width:90%;padding-top:12px;" th:text="${event.eventstart}"></div>
+							</div>
+						</td>
+						<td class="eventmarker"></td>
+						<td width="45%"><a class="showevent" th:text="${event.event}"></a></td>
+						</tr>
+						</table>
+					  </div>
 					  </div>
 					</div>          	
 				</div>
@@ -181,8 +198,8 @@
 					  		</tr>
 					  		<tr th:each="institutions, iterstatus : ${biodata.learninginstitutions}">
 					  			<td th:text="${institutions.name}+', '+${institutions.location}">Institution</td>
-					  			<td th:text="${institutions.awardswithyears.key}">Award</td>
-					  			<td th:text="${institutions.awardswithyears.value}">Year</td>
+					  			<td th:text="${institutions.award}">Award</td>
+					  			<td th:text="${institutions.year}">Year</td>
 					  		</tr>
 					  	</table>
 					  </div>

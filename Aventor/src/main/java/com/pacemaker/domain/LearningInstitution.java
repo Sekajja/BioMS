@@ -1,17 +1,13 @@
 package com.pacemaker.domain;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class LearningInstitution implements Serializable {
@@ -26,16 +22,71 @@ public class LearningInstitution implements Serializable {
 	private long id;
 	
 	@Column
-	@NotEmpty(message="Please provide institution name!")
 	private String name;
 	
 	@Column
-	@NotEmpty(message="Please provide institution location!")
 	private String location;
 	
-	@ElementCollection
-	private Map<String, String> awardswithyears = new HashMap<String, String>(0);
-		
+	@Column
+	private String award;
+	
+	@Column
+	private String year;
+	
+	@ManyToOne
+	private BioData biodata;
+
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public BioData getBiodata() {
+		return biodata;
+	}
+
+	public void setBiodata(BioData biodata) {
+		this.biodata = biodata;
+	}
+
+	public String getAward() {
+		return award;
+	}
+
+	public void setAward(String award) {
+		this.award = award;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	
 	
 	/*
 	 * For later
@@ -43,6 +94,9 @@ public class LearningInstitution implements Serializable {
 	 * @ElementCollection
 	private Set<String> studyfields = new HashSet<String>(0);
 	 * */
+	
+	
+	
 	
 
 }
