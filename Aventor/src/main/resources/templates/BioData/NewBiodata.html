@@ -20,6 +20,8 @@
 	    		background-image: url('/Aventor/images/Marker.png');	    		
 	    		background-repeat: no-repeat;
 	    	}
+	    	
+	    	
 	    </style>
     </head>    
     
@@ -53,10 +55,10 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-2">					
-					<div style="border-top: 2px #AAFFDD solid;  background-color:#fff; width:150px; height: 150px;">
-						  <img src="/Aventor/images/pic02.jpg" th:src="@{/images/pic02.jpg}" alt="..." width="150px" height="120px"/>
-					      <div style="margin-top:5px;">					        
-					        <p><a href="#" class="btn btn-info btn-sm" style="width:100%;" role="button">Upload Photo</a></p>
+					<div style="border-top: 2px #AAFFDD solid;  background-color:#fff; width:160px; height: 150px;">
+						  <img src="/Aventor/images/pic02.jpg" id="facepic" th:src="@{/images/pic02.jpg}" alt="..." width="160" height="120"/>
+					      <div style="margin-top:5px;">					      			        
+					        <p><a href="#" data-toggle="modal" data-target="#uploadmodal" class="btn btn-info btn-sm" style="width:100%;" role="button">Upload Photo</a></p>
 					      </div>
 					</div>  	
 				</div>
@@ -323,6 +325,90 @@
 		
 	
 		<!-- MY MODELS -->
+		<div class="modal fade" id="uploadmodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Upload Photo</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+			      <form action="/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+			      		<table class="table">
+			      			<tr>
+			      				<td valign="middle" style="padding-top:15px;">File to upload:</td>
+			      				<td>
+			      					<div class="row">
+			      					<div class="col-lg-10">
+			      						<input style="width:90%;" class="btn btn-default"  type="file" id="uploadinput" name="file"  placeholder="No file has been uploaded" />
+			      					</div>
+			      					<div class="col-lg-2">
+			      						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#cameramodal" id="showcamera"><i class="fa fa-camera fa-fw"></i></button>
+			      					</div>
+			      					</div>
+			      					
+			      					<div class="input-group" style="margin-top:5px;width:80%;">
+									  <span class="input-group-addon" id="uploadname-addon"><i class="fa fa-user fa-fw"></i></span>
+									  <input class="form-control input-sm notnull" type="text" placeholder="Photo Name"  name="uploadname" aria-describedby="uploadname-addon"/>
+									  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
+			  			  			  <span id="inputError2Status" class="sr-only">(error)</span>
+									</div>
+			      				</td>
+			      			</tr>
+			      		</table>			      		 
+			      </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="uploadbtn" class="btn btn-primary">Upload Photo</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		
+		<div class="modal fade" id="cameramodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Take Photo</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+			      <div id="cam-container">
+	                <video id="cam-space" height="300" width="400" autoplay="autoplay">
+	                </video>              
+            </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" id="takephotobtn" data-toggle="modal" data-target="#canvasmodal" class="btn btn-primary">Take Photo</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		
+		<div class="modal fade" id="canvasmodal" style="margin-top: 50px;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Photo</h4>
+		      </div>
+		      <div class="modal-body" align="center">
+			      <canvas id="cam-canvas" height="300" width="400">
+			      </canvas>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>		        
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		
+		
 		<div class="modal fade" id="eventsmodal" style="margin-top: 50px;">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
@@ -1330,7 +1416,7 @@
  		var institutionCounter = 0;
  		
 		$('#institutionmodalbtn').click(function (e) {
-			institutionIndex = addressCounter;
+			var institutionIndex = institutionCounter;
 			institutionCounter += 1;
 	 	var name = $('#institutionmodalname').val();
 		var location = $('#institutionmodallocation').val();
@@ -1347,10 +1433,10 @@
 			+'</tr>'
 			+'<tr>'	
 			+'<td><a class="showinstitution" style="cursor:pointer;">'+ name +'</a>'
-			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].name}" name="learninginstitutions['+institutionIndex+'].name" class="showinstitutionname" value="'+name+'" th:value="'+name+'"/>'
-			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].location}" name="learninginstitutions['+institutionIndex+'].location" class="showinstitutionlocation" value="'+location+'" th:value="'+location+'"/>'
-			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].award}" name="learninginstitutions['+institutionIndex+'].award" class="showinstitutionaward" value="'+award+'" th:value="'+award+'"/>'
-			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].year}" name="learninginstitutions['+institutionIndex+'].year" class="showinstitutionyear" value="'+year+'" th:value="'+year+'"/>'			
+			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].name}" name="learninginstitutions['+institutionIndex+'].name" class="showinstitutionname" value="'+name+'"/>'
+			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].location}" name="learninginstitutions['+institutionIndex+'].location" class="showinstitutionlocation" value="'+location+'"/>'
+			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].award}" name="learninginstitutions['+institutionIndex+'].award" class="showinstitutionaward" value="'+award+'"/>'
+			+'<input type="hidden" th:field="*{learninginstitutions['+institutionIndex+'].year}" name="learninginstitutions['+institutionIndex+'].year" class="showinstitutionyear" value="'+year+'"/>'			
 			+'</td>'
 			+'<td class="showaward">'+ award +'</td>'
 			+'<td class="showyear">'+ year +'</td>'	
@@ -1443,9 +1529,11 @@
 
 
 /*######SKILLZ MODAL################################################################*/
-
+var skillsCounter = 0;
 $('#skillsmodalbtn').click(function (e) {
-	    
+		var skillsIndex = addressCounter;
+		skillsCounter += 1;
+		
 	 	var name = $('#skillsmodalname').val();
 		var description = $('#skillsmodaldescription').val();
 		var skillstable = $('#skillstable');
@@ -1502,7 +1590,10 @@ $('#skillsmodalbtn').click(function (e) {
 			
 			
 			
-			skillstable.html(skillString);
+			skillstable.html(skillString
+					+'<input type="hidden" th:field="*{skills['+name+']}" name="skills['+name+']" value="'+description+'"/>'
+									
+			);
 			
 			$('#skillsmodal').modal("hide");
 			
@@ -1586,7 +1677,10 @@ $('#skillsmodalbtn').click(function (e) {
 			
 			
 			
-			$('#skillstable .skills .skill:last').after(skillString);
+			$('#skillstable .skills .skill:last').after(skillString
+					+'<input type="hidden" th:field="*{skills['+name+']}" name="skills['+name+']" value="'+description+'"/>'
+					
+					);
 			
 			$('#skillsmodal').modal("hide");
 			
@@ -1647,7 +1741,7 @@ $('#contactmodalbtn').click(function (e) {
 				+'</td>'
 				+'</tr>'
 				+'</table>'
-				+'<input type="hidden" class="showcontactcontact" value="'+contact+'"/>'				
+				+'<input type="hidden" class="showcontactcontact" th:field="*{phonenumbers['+device+']}" name="phonenumbers['+device+']" value="'+contact+'"/>'				
 				+'</div></div>');
 		
 		
@@ -1688,7 +1782,8 @@ $('#contactmodalbtn').click(function (e) {
 				+'<span><a style="cursor:pointer" class="contactremove"><i class="fa fa-close fa-fw"></i></a></span>'			
 				+'</td>'
 				+'</tr>'
-				+'</table>'							
+				+'</table>'	
+				+'<input type="hidden" class="showcontactcontact" th:field="*{phonenumbers['+device+']}" name="phonenumbers['+device+']" value="'+contact+'"/>'
 				+'</div>'				
 				+'</div>');
 		
@@ -1735,11 +1830,11 @@ $('#kincontactmodalbtn').click(function (e) {
 	if(kincontacttable.html() === ""){
 		
 		kincontacttable.html('<div class="row" style="margin-top:15px;margin-left:5px;">'
-				+'<h5>'
+				+'<h6>'
 				+'<b>'
 				+'Next of Kin Contact Information'
 				+'</b>'
-				+'</h5>'
+				+'</h6>'
 				+'</div>'
 				+'<div class="row">'
 			  	+'<div class="col-lg-12">'			  
@@ -1758,7 +1853,7 @@ $('#kincontactmodalbtn').click(function (e) {
 				+'</td>'
 				+'</tr>'
 				+'</table>'
-				+'<input type="hidden" class="showkincontactcontact" value="'+kincontact+'"/>'				
+				+'<input type="hidden" class="showkincontactcontact" th:field="*{nextofkinphonenumbers['+kindevice+']}" name="nextofkinphonenumbers['+kindevice+']" value="'+kincontact+'"/>'				
 				+'</div></div>');
 		
 		
@@ -1799,7 +1894,8 @@ $('#kincontactmodalbtn').click(function (e) {
 				+'<span><a style="cursor:pointer" class="kincontactremove"><i class="fa fa-close fa-fw"></i></a></span>'			
 				+'</td>'
 				+'</tr>'
-				+'</table>'							
+				+'</table>'		
+				+'<input type="hidden" class="showkincontactcontact" th:field="*{nextofkinphonenumbers['+kindevice+']}" name="nextofkinphonenumbers['+kindevice+']" value="'+kincontact+'"/>'
 				+'</div>'				
 				+'</div>');
 		
@@ -1849,6 +1945,7 @@ $('#kincontactmodalbtn').click(function (e) {
 				+'<a class="showlanguage" style="cursor:pointer;">'
 				+language
 				+'</a>'
+				+'<input type="hidden" th:field="*{languageproficiency['+language+']}" name="languageproficiency['+language+']" value="'+proficiency+'"/>'
 				+'</td>'
 				+'<td class="proficiency">'					
 				+proficiency					
@@ -1883,6 +1980,7 @@ $('#kincontactmodalbtn').click(function (e) {
 					+'<a class="showlanguage" style="cursor:pointer;">'
 					+language
 					+'</a>'
+					+'<input type="hidden" th:field="*{languageproficiency['+language+']}" name="languageproficiency['+language+']" value="'+proficiency+'"/>'
 					+'</td>'
 					+'<td class="proficiency">'					
 					+proficiency					
@@ -1943,6 +2041,7 @@ $('#kincontactmodalbtn').click(function (e) {
 						+'<div class="col-lg-1">'
 							+'<span><a style="cursor:pointer" class="additionalremove"><i class="fa fa-close fa-fw"></i></a></span>'
 						+'</div>'
+						+'<input type="hidden" th:field="*{otherinformation['+title+']}" name="otherinformation['+title+']" value="'+further+'"/>'
 					+'</div>'
 					+'<div class="further">'					
 						+further					
@@ -1983,6 +2082,7 @@ $('#kincontactmodalbtn').click(function (e) {
 							+'<div class="col-lg-1">'
 								+'<span><a style="cursor:pointer" class="additionalremove"><i class="fa fa-close fa-fw"></i></a></span>'
 							+'</div>'
+							+'<input type="hidden" th:field="*{otherinformation['+title+']}" name="otherinformation['+title+']" value="'+further+'"/>'
 						+'</div>'
 						+'<div class="further">'					
 							+further					
@@ -2017,6 +2117,105 @@ $('#kincontactmodalbtn').click(function (e) {
 		
 	});
 /*######################################################################*/
+
+/*#############Upload Modal#########################################################*/
+ 	$('#uploadbtn').click(function (e) {
+		$("#uploadForm").submit();				
+	});
+	
+ 	$('#showcamera').click(function (e) {
+ 		ShowCam();		
+	});
+ 	
+ 	$('#takephotobtn').click(function (e) {
+ 		var video = document.getElementById('cam-space');
+ 		var width = 400;
+ 		var height = 300;
+ 		
+ 		var canvas = document.getElementById('cam-canvas');
+ 		canvas.getContext("2d").drawImage(video, 0,0,width,height);
+ 		var img = canvas.toDataURL("image/png");
+ 		$('#facepic').attr("src",img);
+	});
+ 	
+	
+ 	function ShowCam(){
+        
+ 	    var video = document.getElementById('cam-space');
+ 	        
+ 	    navigator.mediaDevices.getUserMedia(
+ 	    {audio: false, 
+ 	        video:{
+ 	        	width:{min:640, ideal: 1280, max: 1920},
+	            height:{min:640, ideal: 720, max: 1080}
+            }
+ 	    }
+ 	            
+ 	).then(function(mediaStream){
+ 	           
+ 	        video.src = window.URL.createObjectURL(mediaStream);
+ 	        video.onloadedmetadata = function(e){
+ 	            video.play();
+ 	        };
+ 	            
+ 	    }).catch(function(error){
+ 	            
+ 	        alert("Switching: Error: "+error.name);
+ 	       	ShowCamOlder();
+ 	    });           
+ 	}
+ 	    
+ 	    
+ 	function ShowCamOlder(){
+ 	    video = document.getElementById('cam-space');
+ 	        
+ 	    navigator.getUserMedia = navigator.getUserMedia ||
+ 	        navigator.mozGetUserMedia ||
+ 	        navigator.webkitGetUserMedia ||
+ 	        navigator.msGetUserMedia;
+ 	        
+ 	    if(navigator.getUserMedia){
+ 	            
+ 	        navigator.getUserMedia({audio: false, 
+ 	            video:{
+ 	                width:{min:640, ideal: 1280, max: 1920},
+ 	                height:{min:640, ideal: 720, max: 1080}
+ 	                
+ 	            }
+ 	        }, 
+ 	        function(stream) {
+ 	            video.src = window.URL.createObjectURL(stream);
+ 	            video.onloadedmetadata = function(e){
+ 	                video.play();
+ 	            };
+ 	        }, function(error) {
+ 	            alert("Error: "+error.name);
+ 	        });
+
+
+ 	    }else{
+ 	        alert("navigator.getUserMedia... Not Supported");
+ 	    }            
+ 	}
+	
+ 	function readURL(input){
+ 		if(input.files && input.files[0]){
+ 			var reader = new FileReader();
+ 			reader.onload = function(e){
+ 				$('#facepic').attr("src",e.target.result);
+ 			}
+ 			reader.readAsDataURL(input.files[0]);
+ 		}
+ 	}
+ 	
+ 	$('#uploadinput').change(function (e) {
+ 		readURL(this);			
+	});
+	
+	
+ /*######################################################################*/
+ 
+ 
 	//]]>
 	    </script>
 	  </div>

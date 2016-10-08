@@ -189,7 +189,7 @@
 					    <h3 class="panel-title">Education Background</h3>
 					  </div>
 					  <div class="panel-body" style="font-size:85%;">
-					  <div>
+					  <div th:if="${not #lists.isEmpty(biodata.learninginstitutions)}">
 					  	<table class="table">
 					  		<tr>
 					  			<th>Institution</th>
@@ -211,8 +211,24 @@
 					    <h3 class="panel-title">Skills</h3>
 					  </div>
 					  <div class="panel-body" style="font-size:85%;">
-					  <div id="skillstable"></div>
-					    Provide skills and abilities possessed by this entry. <a href="#" data-toggle="modal" data-target="#skillsmodal">+ Add Skill</a>
+					  	<div>
+					  		
+							<div th:each="skill, iterstatus : ${biodata.skills}">						
+								<table class="table">
+									<tr>
+										<td>Skill:</td>
+										<td class="skillname">
+											<a th:text="${skill.key}"></a>
+										</td>
+									</tr>
+									<tr>
+										<td>Details:</td>
+										<td class="skilldesc" th:text="${skill.value}"></td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
 					  </div>
 					</div>   
 				</div>
@@ -223,11 +239,41 @@
 					    <h3 class="panel-title">Contact Information</h3>
 					  </div>
 					  <div class="panel-body" style="font-size:85%;">
-					  	<div id="contacttable"></div>
-					    Provide Entry's contact information. <a href="#" data-toggle="modal" data-target="#contactmodal">+ Add Contact</a>
-					    <div style="width:100%; border: 1px #ccc solid;"></div>
-					    <div id="kincontacttable"></div>
-					    Provide Entry's next of kin contact information. <a href="#" data-toggle="modal" data-target="#kincontactmodal">+ Add Contact</a>
+					  	<div>
+					  		<div class="row">
+							  	<div class="col-lg-12" th:each="contact, iterstatus : ${biodata.phonenumbers}">			  	
+									<table class="table" style="margin:0px;">
+										<tr>					
+											<td class="contactdevice" align="left">					
+												<b th:text="${contact.key}"></b>:					
+											</td>
+											<td class="contactcontact" align="left">
+												<a class="showcontact" th:text="${contact.value}"></a>
+											</td>											
+										</tr>
+									</table>								
+								</div>				
+							</div>
+					  	</div>
+					    
+					    <div style="width:100%; border: 1px #ccc solid;" th:if="${not #maps.isEmpty(biodata.nextofkinphonenumbers)}"></div>
+					    <div th:if="${not #maps.isEmpty(biodata.nextofkinphonenumbers)}">
+					    <div class="row" style="margin-top:15px;margin-left:5px;">
+							<h6><b>	Next of Kin Contact Information	</b></h6>
+						</div>
+					    	<div class="col-lg-12" th:each="contact, iterstatus : ${biodata.nextofkinphonenumbers}">			  	
+								<table class="table" style="margin:0px;">
+									<tr>					
+										<td class="contactdevice" align="left">					
+											<b th:text="${contact.key}"></b>:					
+										</td>
+										<td class="contactcontact" align="left">
+											<a class="showcontact" th:text="${contact.value}"></a>
+										</td>											
+									</tr>
+								</table>								
+							</div>
+					    </div>
 					  </div>
 					</div> 
 					
@@ -240,43 +286,31 @@
 					  <div class="panel-body" style="font-size:85%;">
 					    
 					  	<div class="row">
-						  	<div style="float: left;">
-						  		<div class="input-group" style="margin:5px;width:85%;">
-								  <span class="input-group-addon" id="itemorigin-addon"><i class="fa fa-map fa-fw"></i></span>
-								  <input class="form-control input-sm notnull" type="text" placeholder="Home District" th:field="*{origindistrict}" name="origindistrict" aria-describedby="itemorigin-addon"/>
-								  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
-		  			  				<span id="inputError2Status" class="sr-only">(error)</span>
-								</div>
-						  	</div>
-						  	<div style="float: left;">
-						  		<div class="input-group" style="margin:5px;width:85%;">
-								  <span class="input-group-addon" id="itemtribe-addon"><i class="fa fa-map fa-fw"></i></span>
-								  <input class="form-control input-sm notnull" type="text" placeholder="Tribe" th:field="*{tribe}" name="tribe" aria-describedby="itemtribe-addon"/>
-								  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
-		  			  				<span id="inputError2Status" class="sr-only">(error)</span>
-								</div>
-						  	</div>
+							  	<div class="col-lg-6">
+								  	<table class="table table-hover">
+									  	<tr><th><label>Home District: </label></th><td th:text="*{origindistrict}">Wakiso</td></tr>
+									  	<tr><th><label>Home Language: </label></th><td th:text="*{homelanguage}">Luganda</td></tr>
+									  	
+								  	</table>
+							  	</div>
+							  	<div class="col-lg-6">
+							  		<table class="table table-hover">
+									  	<tr><th><label>Tribe: </label></th><td th:text="*{tribe}">Muganda</td></tr>
+									  	<tr><th><label>Preferred Language: </label></th><td th:text="*{preferredlanguage}">Luganda</td></tr>									  	
+								  	</table>
+							  	</div>						  	
 					  	</div>
-					  	<div class="row">
-						  	<div style="float: left;">
-						  		<div class="input-group" style="margin:5px;width:85%;">
-								<span class="input-group-addon" id="itemhomelanguage-addon"><i class="fa fa-map fa-fw"></i></span>
-								<input class="form-control input-sm notnull" type="text" placeholder="Home language" th:field="*{homelanguage}" name="homelanguage" aria-describedby="itemhomelanguage-addon"/>
-								<span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
-	  			  				<span id="inputError2Status" class="sr-only">(error)</span>
-							</div>
-						  	</div>
-						  	<div style="float: left;">
-						  		<div class="input-group" style="margin:5px;width:85%;">
-								  <span class="input-group-addon" id="itempreferredlanguage-addon"><i class="fa fa-map fa-fw"></i></span>
-								  <input class="form-control input-sm notnull" type="text" placeholder="Preferred language" th:field="*{preferredlanguage}" name="preferredlanguage" aria-describedby="itempreferredlanguage-addon"/>
-								  <span class="fa fa-spinner fa-fw fa-spin form-control-feedback" aria-hidden="true"></span>
-		  			  				<span id="inputError2Status" class="sr-only">(error)</span>
-								</div>
-						  	</div>
+					  	<div style="margin-top:10px;" th:if="${not #maps.isEmpty(biodata.languageproficiency)}">
+					  		<table class="table">
+								<tr><th>Language</th><th>Proficiency</th></tr>
+								<tr th:each="lang, iterstatus : ${biodata.languageproficiency}">	
+									<td class="language">
+									<a class="showlanguage" th:text="${lang.key}"></a>									
+									</td>
+									<td class="proficiency" th:text="${lang.value}"></td>
+								</tr>
+							</table>
 					  	</div>
-					  	<div id="origintable" style="margin-top:10px;"></div>
-					  	<p style="margin-top: 5px;">Entry may speak more languages. <a href="#" data-toggle="modal" data-target="#languagemodal">+ Add Language</a></p>
 					  </div>
 					</div>
 					  
@@ -285,10 +319,23 @@
 					    <h3 class="panel-title">Other Information</h3>
 					  </div>
 					  <div class="panel-body" style="font-size:80%;">
-					  <div id="additionaltable"></div>
-					    There may be additional information about the entry this form is not able to capture.
-					    <p style="margin-top: 5px;"><a href="#" data-toggle="modal" data-target="#additionalmodal">+ Add More Information</a></p>
-					    
+					  	<div>
+					  		<table class="table">
+								<tr></tr>
+								<tr th:each="info, iterstatus : ${biodata.otherinformation}">	
+									<td>
+									<div>
+										<div class="row">
+											<div class="col-lg-11 title">
+												<a class="showtitle" th:text="${info.key}"></a>
+											</div>										
+										</div>
+										<div class="further" th:text="${info.value}"></div>						
+									</div>
+									</td>
+								</tr>
+							</table>		
+					  	</div>					   
 					  </div>
 					</div>            	
 				</div>
